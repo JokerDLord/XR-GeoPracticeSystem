@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>实习报告</title>
+    <script src="commons/js/jquery/jquery-3.5.0.js"></script>
+    <script src="commons/js/jquery/jquery-3.5.0.min.js"></script>
+    <script type="text/javascript" src="commons/js/config.js"></script>
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="commons/css/config.css">
+    <link rel="stylesheet" href="commons/css/experimentReport.css">
+    <script type="text/javascript" src="commons/js/echarts.min.js"></script>
+    <script>
+        function limitImg() {
+            var img = document.getElementById(arguments[0]);//显示图片的对象
+            var maxSize = arguments[1];//
+            var allowGIF = arguments[2] || false;
+            var maxWidth = arguments[3] || 0;
+            var maxHeight = arguments[4] || 0;
+            var postfix = getPostfix(img.src);
+            var str = ".jpg";
+            if (allowGIF) { str += ".gif" }
+            if (str.indexOf(postfix.toLowerCase()) == -1) {
+                if (allowGIF) { return "图片格式不对，只能上传jpg或gif图像"; } else { return "图片格式不对，只能上传jpg图像"; }
+            } else if (img.fileSize > maxSize * 1024) {
+                return "图片大小超过限制,请限制在" + maxSize + "K以内";
+            } else {
+                if (img.fileSize == -1) {
+                    return "图片格式错误，可能是已经损坏或者更改扩展名导致，请重新选择一张图片";
+                } else {
+                    if (maxWidth > 0) {
+                        if (img.width > maxWidth) {
+                            return "图片宽度超过限制，请保持在" + maxWidth + "像素内";
+                        } else {
+                            if (img.height > maxHeight) {
+                                return "图片高度超过限制，请保持在" + maxHeight + "像素内";
+                            } else {
+                                return "";
+                            }
+                        }
+                    } else {
+                        return "";
+                    }
+                }
+            }
+        }
+        //根据路径获取文件扩展名
+        function getPostfix(path) {
+            return path.substring(path.lastIndexOf("."), path.length);
+        }
+        //提醒上传的图片格式
+        function edittype() {
+            let file = $("#file").val();
+            if (file) {
+                let filename = file.substr(file.lastIndexOf("."));
+                if (filename != '.jpg'&&filename != '.png') {
+                    alert("请上传jpg或png格式的文件");
+                }
+
+
+            }
+        }
+    </script>
+</head>
+
+<body style="background-color: #d4d4d4;overflow: auto" onload="initTable_report()">
+    <div
+        style="width: 70%;margin-right: 15%;margin-left: 15%;background-color: white;text-align: center;padding: 10px;">
+        <div>
+            <h2>实验报告</h2>
+            <div style="margin-top: 10px;margin-bottom: 10px;">
+                <label style="font-weight: normal">姓名</label>
+                <input>
+            </div>
+            <div style="margin-top: 10px;margin-bottom: 10px;">
+                <label style="font-weight: normal">学号</label>
+                <input type="number">
+            </div>
+            <div style="display: none">
+                <label style="font-weight: normal">您已完成华东师范大学地理学野外综合实习虚拟仿真学习！总共耗时</label>
+                <label id="tb_totalTime"></label>
+                <label style="font-weight: normal">分钟。其中：</label><br>
+                <label style="font-weight: normal">认识实习区域模块学习总时间（分钟）：</label>
+                <label id="tb_dataMapTime"></label><br>
+                <label style="font-weight: normal">植被样方调查学习时间（分钟）：</label>
+                <label id="tb_plantTime"></label><br>
+                <label style="font-weight: normal">土壤剖面观测学习时间（分钟）：</label>
+                <label id="tb_soilTime"></label><br>
+            </div>
+        </div>
+
+        <div>
+            <h2>作业</h2>
+            <p>1、实习区地貌特征:</p>
+            <textarea style="width: 50%;height: 200px;"></textarea>
+
+            <p>2、沟谷线流域范围绘制:</p>
+            <div style="position: relative;width:200px;margin-left: calc(50% - 100px);">
+                <input type="file" accept=".jpg,.png" id="file"
+                    onchange="document.getElementById('img1').src=this.value;edittype();" />
+                <br />
+                <p style="font-size: 13px;color:blue">（请选择流域绘制截图）</p>
+                <img id="img1" />
+            </div>
+
+
+
+            <!--<img style="width: 50%;height: 200px;" id="img_report" src="" />-->
+
+            <p>3、植被垂直地带性分布：</p>
+            <textarea style="width: 50%;height: 200px;"></textarea>
+            <table border="1" style="text-align: center;width: 50%;margin-left: 25%" id="tb_plantReport">
+                <tbody>
+                    <tr class="info">
+                        <td rowspan="2">类型</td>
+                        <td colspan="2">海拔范围
+                            <button class="btn btn-primary btn-sm" style="margin: 5px;"
+                                title="数据已自动带入，若未带入请点击按钮">带入</button>
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td>最低值(m)</td>
+                        <td>最高值(m)</td>
+                    </tr>
+                    <tr class="info">
+                        <td>竹林</td>
+                        <td id="bamboo_min_report">
+                        </td>
+                        <td id="bamboo_max_report">
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td>常绿阔叶林</td>
+                        <td id="green_min_report">
+                        </td>
+                        <td id="green_max_report">
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td>常绿落叶阔叶林</td>
+                        <td id="greenFall_min_report">
+                        </td>
+                        <td id="greenFall_max_report">
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td>落叶阔叶林</td>
+                        <td id="fall_min_report">
+                        </td>
+                        <td id="fall_max_report">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+
+            <p>4、土壤实习点的土壤类型与高程的关系:</p>
+            <textarea style="width: 50%;height: 200px;"></textarea>
+
+            <p>5、多时相遥感图像:</p>
+            <textarea style="width: 50%;height: 200px;"></textarea>
+
+            <p>6、土壤剖面观测虚拟仿真操作结果：</p>
+            <table border="1" style="text-align: center;width: 50%;margin-left: 25%" id="tb_soilSurvey">
+                <tbody>
+                    <tr class="info">
+                        <td rowspan="2">题目</td>
+                        <td colspan="2">结果
+                            <!--<button class="btn btn-primary btn-sm" style="margin: 5px;" title="数据已自动带入，若未带入请点击按钮">带入</button>-->
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td>您的回答</td>
+                        <td>正确/错误</td>
+                    </tr>
+                    <tr class="info">
+                        <td>采集纸盒标本时，采集的顺序是</td>
+                        <td id="soil_Collect">
+                        </td>
+                        <td id="soil_Collect_answer">
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td>观测土壤颜色</td>
+                        <td id="soil_Color">
+                        </td>
+                        <td id="soil_Color_answer">
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td>判断土壤质地</td>
+                        <td id="soil_Texture">
+                        </td>
+                        <td id="soil_Texture_answer">
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td>判断土壤结构</td>
+                        <td id="soil_Structure">
+                        </td>
+                        <td id="soil_Structure_answer">
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td>判断土壤松紧度</td>
+                        <td id="soil_Tightness">
+                        </td>
+                        <td id="soil_Tightness_answer">
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td>判断土壤干湿度</td>
+                        <td id="soil_DryHumidity">
+                        </td>
+                        <td id="soil_DryHumidity_answer">
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td>观察每层土壤根系数量</td>
+                        <td id="soil_Root">
+                        </td>
+                        <td id="soil_Root_answer">
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td>测定土壤pH值</td>
+                        <td id="soil_pH">
+                        </td>
+                        <td id="soil_pH_answer">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div>
+            <h2>实验心得</h2>
+            <textarea style="width: 50%;height: 200px;"></textarea>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary btn-sm" style="width: 250px"
+                onclick="downloadReport()">提交并下载实验报告</button>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>多时相遥感</title>
+    <!--bootstrap相关-->
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/font-awesome.min.css">
+    <link rel="stylesheet" href="commons/bootstrap/bootstrap-datepicker/bootstrap.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/custom.min.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrapValidator.css">
+    <script src="commons/bootstrap/js/bootstrap-table.min.js"></script>
+    <script src="commons/bootstrap/js/bootstrap-datetimepicker.js"></script>
+    <script src="commons/bootstrap/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="commons/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <script src="commons/bootstrap/js/bootstrap.min.js"></script>
+    <script src="commons/bootstrap/js/bootstrapValidator.js"></script>
+    <script src="commons/js/jquery/jquery-3.5.0.js"></script>
+    <script src="commons/js/jquery/jquery-3.5.0.min.js"></script>
+    <link rel="stylesheet" href="http://47.100.49.112:18080/arcgis/arcgis_js_v414_api/arcgis_js_api/library/4.14/esri/themes/light/main.css" />
+    <script src="http://47.100.49.112:18080/arcgis/arcgis_js_v414_api/arcgis_js_api/library/4.14/init.js"></script>
+    <script src="commons/js/swipeLayer.js"></script>
+    <script src="https://heerey525.github.io/layui-v2.4.3/layui/layui.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://heerey525.github.io/layui-v2.4.3/layui/css/layui.css"  media="all">
+
+    <style>
+        html,
+        body,
+        #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+        #now {
+            position: absolute;
+            top: 0;
+            background: white;
+            border-radius: 6px;
+            padding: 10px;
+            left: 20%;
+        }
+        #last {
+            position: absolute;
+            top: 0;
+            background: white;
+            border-radius: 6px;
+            padding: 10px;
+            right: 20%;
+        }
+        .flag {
+            position: absolute;
+            bottom: 0;
+            font-size: 14px;
+            width: 100%;
+            height: 30px;
+            background: black;
+            color: white;
+            line-height: 30px;
+            opacity: 0.5;
+        }
+
+        .select{
+            position: absolute;
+            top: 25px;
+            background: white;
+            border-radius: 6px;
+            padding: 10px;
+        }
+        .select option{
+            height: 50px;
+            font-size: 12px;
+            padding: 5px;
+        }
+
+        .esri-attribution__powered-by,
+        .esri-attribution__sources,
+        .esri-ui-top-right esri-ui-corner{
+            display: none !important;
+        }
+
+        #viewDiv_left {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* display: none; */
+        }
+        #viewDiv_right {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 50%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            /* display: none; */
+        }
+        .chosen{
+            background-color: #f0f0f0;
+            color: #00aeef;
+        }
+        .hide{
+            display: none;
+        }
+        .infosDiv{
+            position: absolute;
+            top: 70px;
+            left: 60px;
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-radius: 5px;
+            width: 200px;
+            opacity: 0.8;
+            display: inline-block;
+            z-index: 9999;
+
+        }
+    </style>
+
+</head>
+<body>
+
+<!--对比方式切换-->
+<div style="position: absolute;right: 10px;bottom: 40px;z-index: 999">
+    <button type="button"
+            class="layui-btn layui-btn-normal chosen"
+            id="btn_duizhao"
+            style="cursor: pointer;"
+            onclick="onSwitchBtnClicked('对照式')">对照式</button>
+    <button type="button"
+            class="layui-btn layui-btn-normal"
+            id="btn_juanlian"
+            style="cursor: pointer;"
+            onclick="onSwitchBtnClicked('卷帘式')">卷帘式</button>
+</div>
+
+<!--多时相遥感图像-->
+<div id="div_roam" class="infosDiv" style="display: inline-block">
+    <button type="button" class="close" style="color: black" onclick="closeItem('虚拟漫游')">
+        &times;
+    </button>
+    <p>实习内容：</p>
+    <p>1）通过比对或卷帘方式分析不同年份、相同季节（如1990年10月和2005年10月）遥感图像上土地覆盖的变化，并在实验报告中填写。</p>
+    <p>2）通过比对或卷帘方式分析同一年份、不同季节（如2019年5月和2019年12月）遥感图像上土地覆盖的变化，并在实验报告中填写。</p>
+
+</div>
+
+<!--卷帘式-->
+<div id="viewDiv"></div>
+
+<!--对照式-->
+<div id="viewDiv_left"></div>
+<div id="viewDiv_right"></div>
+
+
+<select id="select_left" class="select" style="left: 80px;" onchange="onLeftChanged()">
+    <option value="553de2a3506d4d29a5b5b132a06aada7">1990年10月</option>
+    <option value="85c04bbb70fc4ce48e7151857dc32638">1995年01月</option>
+    <option value="60bb8712742e469db72a94dacb9ec761">2000年07月</option>
+    <option value="9cb8b0ce25f945c4bfcd57965d2b11d2">2005年10月</option>
+    <option value="01bbfd642af7400b9663ba7c9ca97740">2010年05月</option>
+    <option value="6833f9bab0cf4cdb9ddc64c9549cc60c">2015年10月</option>
+    <option value="7ada42cb99124befa1970e90a340df6d">2019年04月</option>
+    <option value="441f6c9ef9e24be6ab2c5e15b2ee79f0">2019年05月</option>
+    <option value="9cae728617844254843bdca5f70c7be4">2019年10月</option>
+    <option value="764f263adb744f1ea9ddf46234c6767b">2019年12月</option>
+    <option value="52fa63d833cf4e7bb1792178f2b417e6">2020年02月</option>
+</select>
+<select id="select_right" class="select" style="right: 80px;" onchange="onRightChanged()">
+    <option value="553de2a3506d4d29a5b5b132a06aada7">1990年10月</option>
+    <option value="85c04bbb70fc4ce48e7151857dc32638">1995年01月</option>
+    <option value="60bb8712742e469db72a94dacb9ec761">2000年07月</option>
+    <option value="9cb8b0ce25f945c4bfcd57965d2b11d2">2005年10月</option>
+    <option value="01bbfd642af7400b9663ba7c9ca97740">2010年05月</option>
+    <option value="6833f9bab0cf4cdb9ddc64c9549cc60c">2015年10月</option>
+    <option value="7ada42cb99124befa1970e90a340df6d">2019年04月</option>
+    <option value="441f6c9ef9e24be6ab2c5e15b2ee79f0">2019年05月</option>
+    <option value="9cae728617844254843bdca5f70c7be4">2019年10月</option>
+    <option value="764f263adb744f1ea9ddf46234c6767b">2019年12月</option>
+    <option value="52fa63d833cf4e7bb1792178f2b417e6">2020年02月</option>
+</select>
+<select id="select_left1" class="select" style="left: 80px;" onchange="onLeftChanged1()">
+    <option value="553de2a3506d4d29a5b5b132a06aada7">1990年10月</option>
+    <option value="85c04bbb70fc4ce48e7151857dc32638">1995年01月</option>
+    <option value="60bb8712742e469db72a94dacb9ec761">2000年07月</option>
+    <option value="9cb8b0ce25f945c4bfcd57965d2b11d2">2005年10月</option>
+    <option value="01bbfd642af7400b9663ba7c9ca97740">2010年05月</option>
+    <option value="6833f9bab0cf4cdb9ddc64c9549cc60c">2015年10月</option>
+    <option value="7ada42cb99124befa1970e90a340df6d">2019年04月</option>
+    <option value="441f6c9ef9e24be6ab2c5e15b2ee79f0">2019年05月</option>
+    <option value="9cae728617844254843bdca5f70c7be4">2019年10月</option>
+    <option value="764f263adb744f1ea9ddf46234c6767b">2019年12月</option>
+    <option value="52fa63d833cf4e7bb1792178f2b417e6">2020年02月</option>
+</select>
+<select id="select_right1" class="select" style="right: 80px;" onchange="onRightChanged1()">
+    <option value="553de2a3506d4d29a5b5b132a06aada7">1990年10月</option>
+    <option value="85c04bbb70fc4ce48e7151857dc32638">1995年01月</option>
+    <option value="60bb8712742e469db72a94dacb9ec761">2000年07月</option>
+    <option value="9cb8b0ce25f945c4bfcd57965d2b11d2">2005年10月</option>
+    <option value="01bbfd642af7400b9663ba7c9ca97740">2010年05月</option>
+    <option value="6833f9bab0cf4cdb9ddc64c9549cc60c">2015年10月</option>
+    <option value="7ada42cb99124befa1970e90a340df6d">2019年04月</option>
+    <option value="441f6c9ef9e24be6ab2c5e15b2ee79f0">2019年05月</option>
+    <option value="9cae728617844254843bdca5f70c7be4">2019年10月</option>
+    <option value="764f263adb744f1ea9ddf46234c6767b">2019年12月</option>
+    <option value="52fa63d833cf4e7bb1792178f2b417e6">2020年02月</option>
+</select>
+<div class="flag">
+    &nbsp;&nbsp;&nbsp;&nbsp; 技术支持:上海地听信息科技有限公司
+</div>
+</body>
+</html>

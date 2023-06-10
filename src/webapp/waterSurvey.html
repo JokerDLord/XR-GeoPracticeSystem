@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>天目山地理学野外综合实习虚拟仿真教学平台——植被群落调查</title>
+    <link rel="shortcut icon" href="resource/output/TemplateData/bitbug_favicon.ico">
+    <link rel="stylesheet" href="resource/output/TemplateData/style.css">
+    <script src="resource/output/TemplateData/UnityProgress.js"></script>
+    <script src="commons/js/jquery/jquery-3.5.0.js"></script>
+    <script src="commons/js/jquery/jquery-3.5.0.min.js"></script>
+    <script src="commons/js/config.js"></script>
+    <script src="resource/output/Build/UnityLoader2.js"></script>
+    <script>
+        var WIDTH = window.innerWidth;
+        var HEIGHT = window.innerHeight;
+        var xPros = Math.floor(WIDTH/2);
+        var yPros = Math.floor(HEIGHT/2);
+        var zPros = 100;
+        var AudioContext = window.AudioContext || window.webkitAudioContext;
+        var audioCtx = new AudioContext();
+        var mListrner = audioCtx.listener;
+        mListrner.setPosition(xPros,yPros,zPros);
+        var gameInstance = UnityLoader.instantiate("gameContainer", "resource/output/Build/output_water.json", {onProgress: UnityProgress});
+    </script>
+</head>
+<body onResize="ChangeCanvas()">
+<div class="webgl-content">
+    <div id="gameContainer" style="width: 100vw; height: 100vh;overflow: hidden;"></div>
+</div>
+</body>
+<script type="text/javascript">
+    function ChangeCanvas(){
+        document.getElementById("gameContainer").style.width = window.innerWidth + "px";
+        document.getElementById("gameContainer").style.height = window.innerHeight + "px";
+        document.getElementById("#canvas").style.width = window.innerWidth + "px";
+        document.getElementById("#canvas").style.height = window.innerHeight + "px";
+    }
+    function hideProgress() {
+        document.getElementsByClassName("progress Dark")[0].style.display = 'none';
+        document.getElementsByClassName("logo Dark")[0].style.display = 'none';
+    }
+</script>
+</html>

@@ -1,0 +1,140 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta
+            name="viewport"
+            content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+
+    <title>Sketch in 3D | Sample | ArcGIS API for JavaScript 4.16</title>
+
+    <link
+            rel="stylesheet"
+            href="https://js.arcgis.com/4.16/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.16/"></script>
+
+    <style>
+        html,
+        body,
+        #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        #sketchPanel {
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .esri-button {
+            margin: 2px;
+        }
+    </style>
+    <script>
+        require([
+            "esri/Map",
+            "esri/views/SceneView",
+            "esri/layers/GraphicsLayer",
+            "esri/widgets/Sketch/SketchViewModel",
+            "esri/symbols/WebStyleSymbol"
+        ], function (
+            Map,
+            SceneView,
+            GraphicsLayer,
+            SketchViewModel,
+            WebStyleSymbol
+        ) {
+            // the layer where the graphics are sketched
+            const gLayer = new GraphicsLayer();
+
+            const map = new WebScene({
+                portalItem: {
+                    id: "fca96b4df7324044a08b29b8b7306dc9"
+                }
+            });
+            map.add(gLayer);
+            const view = new SceneView({
+                map: map,
+                container: "viewDiv",
+            });
+            const homeBtn = new Home({
+                view: view
+            });
+            view.ui.add(homeBtn, "top-left");
+            view.ui.remove('attribution');//清除底部powered by ESRI
+
+            const blue = [82, 82, 122, 0.9];
+            const white = [255, 255, 255, 0.8];
+
+            // polygon symbol used for sketching the extruded building footprints
+            const extrudedPolygon = {
+                type: "polygon-3d",
+                symbolLayers: [
+                    {
+                        type: "extrude",
+                        size: 10, // extrude by 10 meters
+                        material: {
+                            color: white
+                        },
+                        edges: {
+                            type: "solid",
+                            size: "3px",
+                            color: blue
+                        }
+                    }
+                ]
+            };
+
+
+            // define the SketchViewModel and pass in the symbols for each geometry type
+            const sketchViewModel = new SketchViewModel({
+                layer: gLayer,
+                view: view,
+                polygonSymbol: extrudedPolygon,
+            });
+
+            // after drawing the geometry, enter the update mode to update the geometry
+            // and the deactivate the buttons
+            sketchViewModel.on("create", function (event) {
+                if (event.state === "complete") {
+                    sketchViewModel.update(event.graphic);
+                    deactivateButtons();
+                }
+            });
+
+            const drawButtons = Array.prototype.slice.call(
+                document.getElementsByClassName("esri-button")
+            );
+
+            // set event listeners to activate sketching graphics
+            drawButtons.forEach(function (btn) {
+                btn.addEventListener("click", function (event) {
+                    deactivateButtons();
+                    event.target.classList.add("esri-button--secondary");
+                    sketchViewModel.create(event.target.getAttribute("data-type"));
+                });
+            });
+
+            function deactivateButtons() {
+                drawButtons.forEach(function (element) {
+                    element.classList.remove("esri-button--secondary");
+                });
+            }
+
+            view.ui.add("sketchPanel", "top-right");
+        });
+    </script>
+</head>
+
+<body>
+<div id="viewDiv"></div>
+<div id="sketchPanel" class="esri-widget">
+    <button id="extrudedPolygon" data-type="polygon" class="esri-button">
+        Draw a building
+    </button>
+</div>
+</body>
+</html>

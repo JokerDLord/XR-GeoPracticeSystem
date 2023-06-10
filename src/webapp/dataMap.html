@@ -1,0 +1,238 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>选择区域与加载数据</title>
+    <link rel="stylesheet" href="http://47.100.49.112:18080/arcgis/arcgis_js_v414_api/arcgis_js_api/library/4.14/esri/themes/dark/main.css"/>
+    <link rel="stylesheet" href="http://47.100.49.112:18080/arcgis/arcgis_js_v414_api/arcgis_js_api/library/4.14/esri/themes/light/main.css"/>
+
+    <script src="commons/js/jquery/jquery-3.5.0.js"></script>
+    <script src="commons/js/jquery/jquery-3.5.0.min.js"></script>
+    <!--bootstrap相关-->
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/font-awesome.min.css">
+    <link rel="stylesheet" href="commons/bootstrap/bootstrap-datepicker/bootstrap.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/custom.min.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrapValidator.css">
+    <script src="commons/bootstrap/js/bootstrap-table.min.js"></script>
+    <script src="commons/bootstrap/js/bootstrap-datetimepicker.js"></script>
+    <script src="commons/bootstrap/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="commons/bootstrap/js/bootstrap-table-zh-CN.min.js"></script>
+    <script src="commons/bootstrap/js/bootstrap.min.js"></script>
+    <script src="commons/bootstrap/js/bootstrapValidator.js"></script>
+
+    <script type="text/javascript" src="commons/js/html2canvas.js"></script><!--截图用-->
+    <!--<script type="text/javascript" src="http://47.100.49.112:18080/arcgis/arcgis_js_v414_api/arcgis_js_api/library/4.14/init.js"></script>-->
+    <script type="text/javascript" src="commons/js/config.js"></script>
+    <script type="text/javascript" src="commons/js/dataMap.js"></script>
+    <link rel="stylesheet" href="commons/css/config.css">
+    <link rel="stylesheet" href="commons/css/dataMap.css">
+    <!--改用4.16版本，绘制面时可以沿z轴移动-->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.16/esri/themes/light/main.css"/>
+    <script src="https://js.arcgis.com/4.16/"></script>
+
+    <style>
+        .esri-ui-corner .esri-expand .esri-widget--panel,
+        .esri-ui-corner .esri-expand .esri-widget--panel-height-only,
+        .esri-ui-corner .esri-component .esri-widget--panel,
+        .esri-ui-corner .esri-component.esri-widget--panel{
+            width:250px;
+        }
+        .esri-component esri-layer-list esri-widget esri-widget--panel{
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+
+        /*隐藏弹出框的“由xxx于xxx时间创建”标注*/
+        .esri-feature__last-edited-info{
+            display: none;
+        }
+        #screenshotDiv {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hide {
+            display: none;
+        }
+
+        img {
+            border: 10px solid white;
+            box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        #screenshotDiv > * {
+            margin: 0.5em;
+        }
+
+        .screenshotCursor {
+            cursor: crosshair;
+        }
+
+        .action-button {
+            padding: 0.6em;
+            border: 1px solid #0079c1;
+            text-align: center;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .action-button:hover,
+        .action-button:focus {
+            background: #0079c1;
+            color: white;
+        }
+
+        #maskDiv {
+            position: absolute;
+            background: rgba(255, 51, 0, 0.1);
+            border: 2px dashed rgb(255, 51, 0);
+        }
+  
+    </style>
+</head>
+
+<body onload="initTable_dataMap()">
+<div id="viewDiv" class="esri-widget"></div>
+<div id="layerList"></div>
+<div id="screenshotDiv" class="hide">
+    <img class="js-screenshot-image" />
+    <div>
+        <label>在图片上加标注: </label>
+        <input type="text" placeholder="Image text" id="textInput" autofocus />
+    </div>
+    <button id="downloadBtn"
+            class="action-button"
+            aria-label="Download image"
+            title="Download image">保存图片
+    </button>
+    <button id="closeBtn"
+            class="action-button"
+            aria-label="Back to webscene"
+            title="Back to webscene">返回场景
+    </button>
+</div>
+<div id="maskDiv" class="hide screenshotCursor"></div>
+
+<!--下面为：左侧表格-->
+<!--地貌-->
+<div id="div_land" class="infosDiv" style="display: none">
+    <button type="button" class="close" style="color: black" onclick="closeItem('地貌')">
+        &times;
+    </button>
+    <p>实习内容：</p>
+    <p>1）显示“地貌实习点”图层，点击每个地貌实习点，了解实习点的情况，查看实习点的全景图</p>
+    <p>2）分析实习区的地貌特征，并在实验报告中填写</p>
+</div>
+<!--水文-->
+<div id="div_water" class="infosDiv" style="display: inline-block">
+    <button type="button" class="close" style="color: black" onclick="closeItem('水文')">
+        &times;
+    </button>
+    <p>实习内容：</p>
+    <p>1）显示“沟谷线”图层，分析实习区域的沟谷分布特征</p>
+    <p>2）绘制流经开山老殿—禅源寺—天目村的沟谷线流域范围，绘制结果截图拷贝粘贴到实验报告中</p>
+    <div id="sketchPanel" class="esri-widget">
+        <button id="extrudedPolygon"
+                data-type="polygon"   
+                class="esri-button"
+                style="border-radius: 15px;"
+                title="点击按钮开始绘制，选中绘制对象单击Backspace即可删除">
+            开始绘制
+        </button>
+    </div>
+    <div class="esri-widget" style="padding: 10px;background-color: rgba(255,255,255,0.8)">
+        <button id="screenshotBtn"
+                class="btn_screenShoot"
+                title="请调整至合适角度再进行截图，也可自行用其他工具截图"
+                aria-label="Select screenshot area">截图</button>
+    </div>
+</div>
+<!--植被-->
+<div id="div_plant" class="infosDiv" style="display: none;width: 350px">
+    <button type="button" class="close" style="color: black" onclick="closeItem('植被')">
+        &times;
+    </button>
+    <p>实习内容：</p>
+    <p>1）显示“植被实习点”图层，点击每个植被实习点，了解实习点的情况，查看实习点的全景图</p>
+    <p>2）显示“植被分布”和“等高线”图层，分析实习区的植被垂直地带性分布特征</p>
+    <div>
+        <table border="1" style="text-align: center;width: 330px;" id="tb_plantInfo">
+            <tbody>
+            <tr class="info">
+                <td rowspan="2">类型</td>
+                <td colspan="2">海拔范围</td>
+            </tr>
+            <tr class="info">
+                <td>最低值(m)</td>
+                <td>最高值(m)</td>
+            </tr>
+            <tr class="info">
+                <td>竹林</td>
+                <td>
+                    <input id="bamboo_min">
+                </td>
+                <td>
+                    <input id="bamboo_max">
+                </td>
+            </tr>
+            <tr class="info">
+                <td>常绿阔叶林</td>
+                <td>
+                    <input id="green_min">
+                </td>
+                <td>
+                    <input id="green_max">
+                </td>
+            </tr>
+            <tr class="info">
+                <td>常绿落叶阔叶林</td>
+                <td>
+                    <input id="greenFall_min">
+                </td>
+                <td>
+                    <input id="greenFall_max">
+                </td>
+            </tr>
+            <tr class="info">
+                <td>落叶阔叶林</td>
+                <td>
+                    <input id="fall_min">
+                </td>
+                <td>
+                    <input id="fall_max">
+                </td>
+            </tr>
+            <tr class="info">
+                <td colspan="3" >
+                    <button class="btn btn-primary btn-sm" style="margin: 5px;" onclick="confirmTable()">确定</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<!--土壤-->
+<div id="div_soil" class="infosDiv" style="display: none;">
+    <button type="button" class="close" style="color: black" onclick="closeItem('土壤')">
+        &times;
+    </button>
+    <p>实习内容：</p>
+    <p>1）显示“土壤实习点”图层，点击每个土壤实习点，了解实习点的情况，查看实习点的全景图</p>
+    <p>2）分析土壤实习点的土壤类型与高程的关系，并在实验报告中填写</p>
+</div>
+
+
+
+</body>
+</html>

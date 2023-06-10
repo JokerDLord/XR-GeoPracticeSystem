@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全景图——地貌02</title>
+
+  <link rel="stylesheet" href="../dist/photo-sphere-viewer.css">
+  <script src="../js/three.min.js"></script>
+  <script src="../js/doT.min.js"></script>
+  <script src="../js/uevent.min.js"></script>
+  <script src="../js/D.min.js"></script>
+  <script src="../js/photo-sphere-viewer.min.js"></script>
+  <script src="../dist/photo-sphere-viewer.js"></script>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    #photosphere {
+      width: 100%;
+      height: 100%;
+    }
+
+    .psv-button.custom-button {
+      font-size: 22px;
+      line-height: 20px;
+    }
+
+    .demo-label {
+      color: white;
+      font-size: 20px;
+      font-family: Helvetica, sans-serif;
+      text-align: center;
+      padding: 5px;
+      border: 1px solid white;
+      background: rgba(0, 0, 0, 0.4);
+    }
+    .psv-navbar{
+      display: none;
+    }
+  </style>
+</head>
+<body onload="load()" onmousedown="creatDraws()">
+<div id="photosphere"></div>
+<script>
+  var PSV = new PhotoSphereViewer({
+    container: 'photosphere',
+    panorama: "../image/land02.jpg"
+  });
+  var aa = PSV.getPosition();
+  var bb = PSV.camera;
+  var gscene = null;
+  var gcamera = null;
+  var grenderer = null;
+  var geometry;
+
+  function load() {
+    geometry = new THREE.Geometry();
+  }
+  function creatDraws() {
+      createText();
+      createLine();
+  }
+
+  // 创建文字
+  function createLine() {
+    var material = new THREE.LineBasicMaterial({
+      color: 0xff0000,
+      gapSize: 1, // 间隙的大小，默认值为 1。
+      linewidth: 10, // 控制线宽。默认值为 1。
+    });
+      var geometry = new THREE.Geometry();
+      var p1 = new THREE.Vector3(-30.22573355153284, 27.413836981164497, -91.17184785246067);
+      var p2 = new THREE.Vector3(-8.352912080972663, 6.940500594722404, -99.319174825437);
+      var p3 = new THREE.Vector3(-33.934371705400864, 6.939500149746169, -90.35529262937708);
+      geometry.vertices.push(p1, p2, p3);
+      var material = new THREE.LineBasicMaterial({
+          color: 0xff0000,
+          linewidth:1000
+      });
+      var line = new THREE.Line(geometry, material);
+      gscene.add(line);
+    grenderer.render(gscene, gcamera);
+
+  }
+
+  // 创建文字
+  function createText() {
+    grenderer.sortObjects = false;
+    var text = new THREE.FontLoader().load('../font/FZLanTingHeiS-UL-GB_Regular.json', function (text) {
+      var gem = new THREE.TextGeometry('倾角', {
+        size: 2, //字号大小，一般为大写字母的高度
+        height: 0.5, //文字的厚度
+        weight: 'normal', //值为'normal'或'bold'，表示是否加粗
+        font: text, //字体，默认是'helvetiker'，需对应引用的字体文件
+        background:"#F1542B"
+      });
+      gem.center();
+      var mat = new THREE.MeshBasicMaterial(
+        { color: 0xF11019}
+      );
+      var textObj = new THREE.Mesh(gem, mat);
+      textObj.castShadow = true;
+      textObj.position.x = -20.810350443233578;
+      textObj.position.y = 17.857955091250863;
+      textObj.position.z = -94.23207133700195;
+      textObj.rotation.x=0;
+      textObj.rotation.y=0;
+      textObj.rotation.z=0;
+      textObj.renderOrder = 1;
+      gscene.add(textObj);
+    });
+  }
+
+
+</script>
+
+</body>
+</html>

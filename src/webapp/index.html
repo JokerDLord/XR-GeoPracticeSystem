@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>地理学野外综合实习虚拟仿真教学平台</title>
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="commons/css/index.css">
+    <script src="commons/js/jquery/jquery-3.5.0.js"></script>
+    <script src="commons/js/jquery/jquery-3.5.0.min.js"></script>
+    <script src="commons/bootstrap/js/bootstrap.min.js"></script>
+    <script src="commons/js/config.js"></script>
+    <script src="commons/js/index.js"></script>
+</head>
+<body id="bg">
+
+<div id="wholeContent">
+    <!--标题栏-->
+    <div id="title"></div>
+    <!--左半部分-->
+    <div id="left_part">
+
+        <div id="leftbar" class="leftsidebar_box" onclick="onMenuClicked()">
+            <div class="line"></div>
+            <!--平台介绍-->
+            <dl class="main_dl" id="item_roam">
+                <dt class="main_dt">平台基础信息<img class="main_img" src="commons/image/index/select_xl01.png"></dt>
+                <dt class="main_dd" onclick="changeIframe('平台介绍')">平台介绍</dt>
+                <dt class="main_dd" onclick="changeIframe('平台操作步骤')">平台操作步骤</dt>
+            </dl>
+
+            <!--认识实习区域-->
+            <dl class="main_dl" id="item_acknowledge">
+                <dt class="main_dt">认识实习区域<img class="main_img" src="commons/image/index/select_xl01.png"></dt>
+                <dd class="main_dd" onclick="changeIframe('基本情况')">基本情况</dd>
+                <dd class="main_dd" onclick="changeIframe('虚拟漫游')">虚拟漫游</dd>
+                <dd class="main_dd" onclick="changeIframe('地貌')">地貌</dd>
+                <dd class="main_dd" onclick="changeIframe('水文')">水文</dd>
+                <dd class="main_dd" onclick="changeIframe('植被')">植被</dd>
+                <dd class="main_dd" onclick="changeIframe('土壤')">土壤</dd>
+                <dd class="main_dd" onclick="changeIframe('多时相遥感图像')">多时相遥感图像</dd>
+            </dl>
+            <!--野外调查方法-->
+            <dl class="main_dl" id="item_out">
+                <dt class="main_dt">野外调查方法<img class="main_img" src="commons/image/index/select_xl01.png"></dt>
+                <dd class="main_dd" onclick="changeIframe('植被样方调查')">植被样方调查</dd>
+                <dd class="main_dd" onclick="changeIframe('土壤剖面观测')">土壤剖面观测</dd>
+                <!--<dd class="main_dd" onclick="changeIframe('水文实习')">水文实习</dd>-->
+                <dd class="main_dd" onclick="changeIframe('移动GIS应用')">移动GIS应用</dd>
+            </dl>
+            <!--地理现象模拟-->
+            <dl class="main_dl" id="item_model">
+                <dt class="main_dt">地理现象模拟<img class="main_img" src="commons/image/index/select_xl01.png"></dt>
+                <!--<dd class="main_dd" onclick="changeIframe('植被群落演替')">植被群落演替</dd>-->
+                <!--<dd class="main_dd" onclick="changeIframe('地貌演变')">地貌演变</dd>-->
+                <dd class="main_dd" onclick="changeIframe('土地利用变化与预测')">土地利用变化与预测</dd>
+            </dl>
+            <!--实验报告-->
+            <dl class="main_dl" id="item_paper">
+                <dt class="main_dt">实验报告<img class="main_img" src="commons/image/index/select_xl01.png"></dt>
+                <dd class="main_dd" onclick="changeIframe('在线填写')">在线填写</dd>
+            </dl>
+            <!--实验报告-->
+            <dl class="main_dl" id="item_system">
+                <dt class="main_dt" onclick="changeIframe('系统维护')">系统维护</dt>
+            </dl>
+        </div>
+
+        <!--左半部分收起按钮-->
+        <div id="btn_popup" class="btn_left_show" onclick="menuController()"></div>
+    </div>
+    <!--右半部分-->
+    <div id="right_part" class="right_normal">
+        <div id="content">
+            <iframe id="iframe"        frameborder="0" src="dataMap.html" style="display: none"></iframe>
+            <iframe id="iframe_ZB"     frameborder="0" style="display: none"></iframe>
+            <iframe id="iframe_TR"     frameborder="0" style="display: none"></iframe>
+            <iframe id="iframe_Water"  frameborder="0" style="display: none"></iframe>
+            <iframe id="iframe_others" frameborder="0" style="display: none"></iframe>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

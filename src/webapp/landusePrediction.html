@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>土地利用变化与预测</title>
+    <script type="text/javascript" src="commons/js/jquery/jquery-3.5.0.js"></script>
+    <script type="text/javascript" src="commons/js/jquery/jquery-3.5.0.min.js"></script>
+    <style>
+        body{
+            overflow: hidden;
+        }
+        #title{
+            background-color: #1b6d85;
+            height: 50px;
+        }
+        #title label {
+            font-family: 'Microsoft YaHei';
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            line-height: 50px;
+            margin-left: 20px
+        }
+        #videoBox {
+            width: 60%;
+            height: 10%;
+            margin-left: 20%;
+            margin-top: 10px;
+        }
+        #video {
+            zoom: 0.5;
+            margin-left: 5%;
+        }
+
+    </style>
+</head>
+<body>
+<div id="content">
+    <!--<div id="title">-->
+        <!--<label>土地利用变化与预测</label>-->
+    <!--</div>-->
+    <div id="videoBox">
+        <video id="video"
+               src="resource/Videos/landuse_change.mp4"
+               controls width="90%" height="100%" >您的浏览器不支持。</video>
+        <!--<button type="button" style="text-align: center;" onclick="launchFullScreen(document.getElementById('video'))">全屏</button>-->
+
+    </div>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>手机地图</title>
+    <link rel="stylesheet" href="http://47.100.49.112:18080/arcgis/arcgis_js_v414_api/arcgis_js_api/library/4.14/esri/themes/dark/main.css"/>
+    <link rel="stylesheet" href="http://47.100.49.112:18080/arcgis/arcgis_js_v414_api/arcgis_js_api/library/4.14/esri/themes/light/main.css"/>
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap-table.min.css">
+    <script src="commons/js/jquery/jquery-3.5.0.js"></script>
+    <script src="commons/js/jquery/jquery-3.5.0.min.js"></script>
+    <script type="text/javascript" src="http://47.100.49.112:18080/arcgis/arcgis_js_v414_api/arcgis_js_api/library/4.14/init.js"></script>
+    <!--<script src="https://js.arcgis.com/4.15/"></script>-->
+    <script type="text/javascript" src="commons/js/config.js"></script>
+    <link rel="stylesheet" href="commons/css/config.css">
+    <link rel="stylesheet" href="commons/css/phoneMap.css">
+    <script type="text/javascript" src="commons/js/phoneMap.js"></script>
+
+    <style>
+        .esri-ui-corner .esri-expand .esri-widget--panel,
+        .esri-ui-corner .esri-expand .esri-widget--panel-height-only,
+        .esri-ui-corner .esri-component .esri-widget--panel,
+        .esri-ui-corner .esri-component .esri-widget--panel{
+            width:250px;
+        }
+        .esri-component esri-layer-list esri-widget esri-widget--panel{
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="viewDiv"></div>
+<div id="layerList"></div>
+<div id="infoDiv">
+    <input class="esri-component esri-widget--button esri-widget esri-interactive"
+           type="button" id="switch-btn" value="2D"/>
+
+    <input class="esri-component esri-widget--button esri-widget esri-interactive"
+           type="button" id="resetScene-btn" value="重置" style="font-size: 10px"/>
+</div>
+
+</body>
+</html>

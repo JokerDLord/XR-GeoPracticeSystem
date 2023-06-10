@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhotoSphereViewer - equirectangular demo</title>
+
+  <link rel="stylesheet" href="../dist/photo-sphere-viewer.css">
+  <script src="../js/three.min.js"></script>
+  <script src="../js/doT.min.js"></script>
+  <script src="../js/uevent.min.js"></script>
+  <script src="../js/D.min.js"></script>
+  <!-- <script src="../js/photo-sphere-viewer.min.js"></script>-->
+  <script src="../dist/photo-sphere-viewer.js"></script>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    #photosphere {
+      width: 100%;
+      height: 100%;
+    }
+
+    .psv-button.custom-button {
+      font-size: 22px;
+      line-height: 20px;
+    }
+
+    .demo-label {
+      color: white;
+      font-size: 20px;
+      font-family: Helvetica, sans-serif;
+      text-align: center;
+      padding: 5px;
+      border: 1px solid white;
+      background: rgba(0, 0, 0, 0.4);
+    }
+  </style>
+</head>
+<body onload="load()" onmousedown="onDocumentMouseDown(event)">
+<input onclick="createLine()" value="test" type="button" style="z-index: 9999999999;position: absolute"/>
+<input onclick="createText()" value="test" type="button" style="z-index: 9999999999;position: absolute;left:100px;"/>
+<div id="photosphere"></div>
+<script>
+  var PSV = new PhotoSphereViewer({
+    container: 'photosphere',
+    panorama: "../image/水文.jpg"
+  });
+  var aa = PSV.getPosition();
+  var bb = PSV.camera;
+  var gscene = null;
+  var gcamera = null;
+  var grenderer = null;
+  var geometry;
+
+  function load() {
+    geometry = new THREE.Geometry();
+  }
+
+  // 创建文字
+  function createLine() {
+
+    var material = new THREE.LineBasicMaterial({
+      color: 0xff0000,
+     // dashSize: 3, // 虚线的大小，是指破折号和间隙之和。默认值为 3。
+      gapSize: 1, // 间隙的大小，默认值为 1。
+      linewidth: 10, // 控制线宽。默认值为 1。
+    });
+    var line = new THREE.Line(geometry, material);
+    gscene.add(line);
+    //gcamera.position.z = 100;
+    grenderer.render(gscene, gcamera);
+    /* var worldVector = new THREE.Vector3(
+       0,
+       0,
+       0
+     );
+     var standardVector = worldVector.project(gcamera);//世界坐标转标准设备坐标
+     var a = window.innerWidth / 2;
+     var b = window.innerHeight / 2;
+     var x = Math.round(standardVector.x * a + a);//标准设备坐标转屏幕坐标
+     var y = Math.round(-standardVector.y * b + b);//标准设备坐标转屏幕坐标*/
+    //alert(x);
+  }
+
+  function onDocumentMouseDown(event) {
+
+    event.preventDefault();
+    var vector = new THREE.Vector3();//三维坐标对象
+    vector.set(
+      ( event.clientX / window.innerWidth ) * 2 - 1,
+      -( event.clientY / window.innerHeight ) * 2 + 1,
+      0.5);
+    vector.unproject(gcamera);
+    var raycaster = new THREE.Raycaster(gcamera.position, vector.sub(gcamera.position).normalize());
+    var intersects = raycaster.intersectObjects(gscene.children);
+    if (intersects.length > 0) {
+      var selected = intersects[0];//取第一个物体
+      console.log("x坐标:" + selected.point.x);
+      console.log("y坐标:" + selected.point.y);
+      console.log("z坐标:" + selected.point.z);
+      var p1 = new THREE.Vector3(selected.point.x, selected.point.y, selected.point.z);
+      geometry.vertices.push(p1);
+    }
+    /*    var line = createLine();
+        gscene.add( line );
+        //gcamera.position.z = 100;
+        grenderer.render( gscene, gcamera );*/
+
+  }
+
+  // 实线
+  function newLine() {
+    var geometry = new THREE.Geometry();
+
+    var p1 = new THREE.Vector3(9.535407358152089, 10, 99.50265657341797);
+    var p2 = new THREE.Vector3(20.815842873034024, 10, 99.50265657341797);
+    var p3 = new THREE.Vector3(30.815842873034024, 10, 99.50265657341797);
+    var p3 = new THREE.Vector3(40.815842873034024, 10, 99.50265657341797);
+    var p3 = new THREE.Vector3(50.815842873034024, 10, 99.50265657341797);
+    var p3 = new THREE.Vector3(60.815842873034024, 10, 99.50265657341797);
+    geometry.vertices.push(p1, p2, p3);
+
+    //注意这里使用的是LineBasicMaterial 实线
+    //https://threejs.org/docs/index.html#api/zh/materials/LineBasicMaterial
+    /*    var material = new THREE.LineBasicMaterial({
+          color:0xff0000,
+          lineWidth:2
+        });*/
+    var material = new THREE.lineBasicMaterial({
+      color: 0xff0000,
+      linewidth:1000
+    });
+    var line = new THREE.Line(geometry, material);
+
+    return line;
+  }
+
+
+  // 创建文字
+  function createText() {
+
+/*    var options = {
+      size: 10,
+      height: 0,
+      weight: 'normal',
+      font: 'helvetiker',
+      style: 'normal',
+      bevelThickness: 1,
+      bevelSize: 1,
+      bevelSegments: 1,
+      curveSegments: 50,
+      steps: 1
+    };
+    scene.add(new THREE.Mesh(
+      new THREE.TextGeometry("hello", options),
+      new THREE.MeshBasicMaterial({color: 0xcccccc})
+    ))*/
+    grenderer.sortObjects = false;
+    var text = new THREE.FontLoader().load('../font/STSong_Regular.json', function (text) {
+      var gem = new THREE.TextGeometry('林间小道', {
+        size: 3, //字号大小，一般为大写字母的高度
+        height: 1, //文字的厚度
+        weight: 'normal', //值为'normal'或'bold'，表示是否加粗
+        font: text, //字体，默认是'helvetiker'，需对应引用的字体文件
+        background:"#F1542B"
+      });
+      gem.center();
+      var mat = new THREE.MeshBasicMaterial(
+      { color: 0xF11019}
+      );
+      var textObj = new THREE.Mesh(gem, mat);
+      textObj.castShadow = true;
+      textObj.position.x = 9.175198623159748;
+      textObj.position.y = -26.3057970913586+15;
+      textObj.position.z =95.99674664310264-15;
+
+      textObj.rotation.x=0;
+      textObj.rotation.y=9;
+      textObj.rotation.z=0;
+      textObj.renderOrder = 1;
+      gscene.add(textObj);
+      //new TWEEN.Tween(textObj.rotation).to({y: Math.PI * 2}, 2000).repeat(Infinity).yoyo(true).start();
+    });
+  }
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>GPS定位及跟踪</title>
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="commons/bootstrap/css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="commons/css/trackGPS.css">
+    <script src="commons/js/jquery/jquery-3.5.0.js"></script>
+    <script src="commons/js/jquery/jquery-3.5.0.min.js"></script>
+    <script type="text/javascript" src="commons/bootstrap/js/bootstrap.min.js"></script>
+
+    <style>
+        html,
+        body,
+        #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.14/esri/themes/light/main.css"/>
+    <script src="https://js.arcgis.com/4.14/"></script>
+    <script src="commons/js/GPStrack.js"></script>
+</head>
+
+<body>
+<div id="viewDiv"></div>
+<div style="position: absolute;top: 30px;left: 60px;">
+    <button class="btn btn-primary btn-sm"
+            data-toggle="modal"
+            data-target="#myModal"
+            title="点击查看二维码，手机访问网页">二维码</button>
+</div>
+
+
+<!--二维码-->
+<div id="myModal" class="modal">
+    <div class="modal-content" style="width: 30%">
+        <div class="modal-header" style="height: 10%;">
+            <div style="width: 100%;text-align: center">
+                <span style="font-size: 20px;width: 100%">手机端访问网页</span>
+            </div>
+            <button type="button" id="closeBtn" class="close" data-dismiss="modal" aria-hidden="true">
+                &times;
+            </button>
+        </div>
+        <div class="modal-body" style="height: 90%;overflow:auto;text-align: center">
+            <p>手机扫描下方二维码，打开网页实现定位与追踪功能</p>
+            <img src="commons/image/trackGPS.png">
+        </div>
+    </div>
+</div>
+</body>
+</html>
