@@ -1,0 +1,1 @@
+###this is tips for using the geography practice system in early version
