@@ -21,8 +21,16 @@
     <script src="commons/bootstrap/js/bootstrapValidator.js"></script>
     <script src="commons/js/jquery/jquery-3.5.0.js"></script>
     <script src="commons/js/jquery/jquery-3.5.0.min.js"></script>
-    <link rel="stylesheet" href="http://47.100.49.112:18080/arcgis/arcgis_js_v414_api/arcgis_js_api/library/4.14/esri/themes/light/main.css" />
-    <script src="http://47.100.49.112:18080/arcgis/arcgis_js_v414_api/arcgis_js_api/library/4.14/init.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://js.arcgis.com/4.6/esri/css/main.css"/>
+    <script src="https://js.arcgis.com/4.6/"></script> -->
+
+    <link rel="stylesheet" href="https://js.geoscene.cn/4.23/geoscene/themes/light/main.css">
+    <script src="https://js.geoscene.cn/4.23/"></script>
+    
+
+    <!-- <link rel="stylesheet" href="http://47.100.49.112:18080/arcgis/arcgis_js_v414_api/arcgis_js_api/library/4.14/esri/themes/light/main.css" />
+    <script src="http://47.100.49.112:18080/arcgis/arcgis_js_v414_api/arcgis_js_api/library/4.14/init.js"></script> -->
     <script src="commons/js/swipeLayer.js"></script>
     <script src="https://heerey525.github.io/layui-v2.4.3/layui/layui.js" charset="utf-8"></script>
     <link rel="stylesheet" href="https://heerey525.github.io/layui-v2.4.3/layui/css/layui.css"  media="all">
@@ -162,59 +170,59 @@
 
 
 <select id="select_left" class="select" style="left: 80px;" onchange="onLeftChanged()">
-    <option value="553de2a3506d4d29a5b5b132a06aada7">1990年10月</option>
-    <option value="85c04bbb70fc4ce48e7151857dc32638">1995年01月</option>
-    <option value="60bb8712742e469db72a94dacb9ec761">2000年07月</option>
-    <option value="9cb8b0ce25f945c4bfcd57965d2b11d2">2005年10月</option>
-    <option value="01bbfd642af7400b9663ba7c9ca97740">2010年05月</option>
-    <option value="6833f9bab0cf4cdb9ddc64c9549cc60c">2015年10月</option>
-    <option value="7ada42cb99124befa1970e90a340df6d">2019年04月</option>
-    <option value="441f6c9ef9e24be6ab2c5e15b2ee79f0">2019年05月</option>
-    <option value="9cae728617844254843bdca5f70c7be4">2019年10月</option>
-    <option value="764f263adb744f1ea9ddf46234c6767b">2019年12月</option>
-    <option value="52fa63d833cf4e7bb1792178f2b417e6">2020年02月</option>
+    <option value="e85dfd664c7b4b7db47a49a9bef5abb9">1990年10月</option>
+    <option value="4b191ac1ca3d437d87e3a426ba96ba88">1995年01月</option>
+    <option value="98dd57f868a5453482d5d362074450dd">2000年07月</option>
+    <option value="d291d689abb24a42bae88bff59642138">2005年10月</option>
+    <option value="bae059053a844d22a62a433e566aeb86">2010年05月</option>
+    <option value="6a8fe8bbf66843d48d69e8cfdef79fdd">2015年10月</option>
+    <option value="acdc191ce8b94256a6e196f85f8617a1">2019年04月</option>
+    <option value="b6012b9ff9da46a9bc65fe342e658e46">2019年05月</option>
+    <option value="2033b6a5118741478c6205a7f471c43b">2019年10月</option>
+    <option value="e32fcc6d029646e9be35b7f368f4e905">2019年12月</option>
+    <option value="d9f146b647f7454ea2cd31e9c439e30e">2020年02月</option>
 </select>
 <select id="select_right" class="select" style="right: 80px;" onchange="onRightChanged()">
-    <option value="553de2a3506d4d29a5b5b132a06aada7">1990年10月</option>
-    <option value="85c04bbb70fc4ce48e7151857dc32638">1995年01月</option>
-    <option value="60bb8712742e469db72a94dacb9ec761">2000年07月</option>
-    <option value="9cb8b0ce25f945c4bfcd57965d2b11d2">2005年10月</option>
-    <option value="01bbfd642af7400b9663ba7c9ca97740">2010年05月</option>
-    <option value="6833f9bab0cf4cdb9ddc64c9549cc60c">2015年10月</option>
-    <option value="7ada42cb99124befa1970e90a340df6d">2019年04月</option>
-    <option value="441f6c9ef9e24be6ab2c5e15b2ee79f0">2019年05月</option>
-    <option value="9cae728617844254843bdca5f70c7be4">2019年10月</option>
-    <option value="764f263adb744f1ea9ddf46234c6767b">2019年12月</option>
-    <option value="52fa63d833cf4e7bb1792178f2b417e6">2020年02月</option>
+    <option value="e85dfd664c7b4b7db47a49a9bef5abb9">1990年10月</option>
+    <option value="4b191ac1ca3d437d87e3a426ba96ba88">1995年01月</option>
+    <option value="98dd57f868a5453482d5d362074450dd">2000年07月</option>
+    <option value="d291d689abb24a42bae88bff59642138">2005年10月</option>
+    <option value="bae059053a844d22a62a433e566aeb86">2010年05月</option>
+    <option value="6a8fe8bbf66843d48d69e8cfdef79fdd">2015年10月</option>
+    <option value="acdc191ce8b94256a6e196f85f8617a1">2019年04月</option>
+    <option value="b6012b9ff9da46a9bc65fe342e658e46">2019年05月</option>
+    <option value="2033b6a5118741478c6205a7f471c43b">2019年10月</option>
+    <option value="e32fcc6d029646e9be35b7f368f4e905">2019年12月</option>
+    <option value="d9f146b647f7454ea2cd31e9c439e30e">2020年02月</option>
 </select>
 <select id="select_left1" class="select" style="left: 80px;" onchange="onLeftChanged1()">
-    <option value="553de2a3506d4d29a5b5b132a06aada7">1990年10月</option>
-    <option value="85c04bbb70fc4ce48e7151857dc32638">1995年01月</option>
-    <option value="60bb8712742e469db72a94dacb9ec761">2000年07月</option>
-    <option value="9cb8b0ce25f945c4bfcd57965d2b11d2">2005年10月</option>
-    <option value="01bbfd642af7400b9663ba7c9ca97740">2010年05月</option>
-    <option value="6833f9bab0cf4cdb9ddc64c9549cc60c">2015年10月</option>
-    <option value="7ada42cb99124befa1970e90a340df6d">2019年04月</option>
-    <option value="441f6c9ef9e24be6ab2c5e15b2ee79f0">2019年05月</option>
-    <option value="9cae728617844254843bdca5f70c7be4">2019年10月</option>
-    <option value="764f263adb744f1ea9ddf46234c6767b">2019年12月</option>
-    <option value="52fa63d833cf4e7bb1792178f2b417e6">2020年02月</option>
+    <option value="e85dfd664c7b4b7db47a49a9bef5abb9">1990年10月</option>
+    <option value="4b191ac1ca3d437d87e3a426ba96ba88">1995年01月</option>
+    <option value="98dd57f868a5453482d5d362074450dd">2000年07月</option>
+    <option value="d291d689abb24a42bae88bff59642138">2005年10月</option>
+    <option value="bae059053a844d22a62a433e566aeb86">2010年05月</option>
+    <option value="6a8fe8bbf66843d48d69e8cfdef79fdd">2015年10月</option>
+    <option value="acdc191ce8b94256a6e196f85f8617a1">2019年04月</option>
+    <option value="b6012b9ff9da46a9bc65fe342e658e46">2019年05月</option>
+    <option value="2033b6a5118741478c6205a7f471c43b">2019年10月</option>
+    <option value="e32fcc6d029646e9be35b7f368f4e905">2019年12月</option>
+    <option value="d9f146b647f7454ea2cd31e9c439e30e">2020年02月</option>
 </select>
 <select id="select_right1" class="select" style="right: 80px;" onchange="onRightChanged1()">
-    <option value="553de2a3506d4d29a5b5b132a06aada7">1990年10月</option>
-    <option value="85c04bbb70fc4ce48e7151857dc32638">1995年01月</option>
-    <option value="60bb8712742e469db72a94dacb9ec761">2000年07月</option>
-    <option value="9cb8b0ce25f945c4bfcd57965d2b11d2">2005年10月</option>
-    <option value="01bbfd642af7400b9663ba7c9ca97740">2010年05月</option>
-    <option value="6833f9bab0cf4cdb9ddc64c9549cc60c">2015年10月</option>
-    <option value="7ada42cb99124befa1970e90a340df6d">2019年04月</option>
-    <option value="441f6c9ef9e24be6ab2c5e15b2ee79f0">2019年05月</option>
-    <option value="9cae728617844254843bdca5f70c7be4">2019年10月</option>
-    <option value="764f263adb744f1ea9ddf46234c6767b">2019年12月</option>
-    <option value="52fa63d833cf4e7bb1792178f2b417e6">2020年02月</option>
+    <option value="e85dfd664c7b4b7db47a49a9bef5abb9">1990年10月</option>
+    <option value="4b191ac1ca3d437d87e3a426ba96ba88">1995年01月</option>
+    <option value="98dd57f868a5453482d5d362074450dd">2000年07月</option>
+    <option value="d291d689abb24a42bae88bff59642138">2005年10月</option>
+    <option value="bae059053a844d22a62a433e566aeb86">2010年05月</option>
+    <option value="6a8fe8bbf66843d48d69e8cfdef79fdd">2015年10月</option>
+    <option value="acdc191ce8b94256a6e196f85f8617a1">2019年04月</option>
+    <option value="b6012b9ff9da46a9bc65fe342e658e46">2019年05月</option>
+    <option value="2033b6a5118741478c6205a7f471c43b">2019年10月</option>
+    <option value="e32fcc6d029646e9be35b7f368f4e905">2019年12月</option>
+    <option value="d9f146b647f7454ea2cd31e9c439e30e">2020年02月</option>
 </select>
-<div class="flag">
+<!-- <div class="flag">
     &nbsp;&nbsp;&nbsp;&nbsp; 技术支持:上海地听信息科技有限公司
-</div>
+</div> -->
 </body>
 </html>

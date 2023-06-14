@@ -16,14 +16,15 @@ var mapid_left1,mapid_right1;
 
 function initMap(mapid_left,mapid_right) {
     require([
-        "esri/Map",
-        "esri/views/MapView",
-        "esri/layers/TileLayer",
-        "esri/widgets/LayerList",
-        "esri/widgets/Swipe",
-        "esri/widgets/Expand",
-        "esri/Graphic"
-    ], function(Map, MapView, TileLayer, LayerList, Swipe, Expand, Graphic) {
+        "geoscene/Map",
+        "geoscene/views/MapView",
+        // "geoscene/layers/TileLayer",
+        "geoscene/layers/ImageryLayer",
+        "geoscene/widgets/LayerList",
+        "geoscene/widgets/Swipe",
+        "geoscene/widgets/Expand",
+        "geoscene/Graphic"
+    ], function(Map, MapView, ImageryLayer, LayerList, Swipe, Expand, Graphic) {
         const map = new Map({});
 
         //region 原本的多时相遥感影像对比
@@ -71,29 +72,31 @@ function initMap(mapid_left,mapid_right) {
         // map.add(nearInfrared2);
         //endregion
 
-        const infrared = new TileLayer({
+        const infrared = new ImageryLayer({
             portalItem: {  // autocasts as new PortalItem()
                 id: mapid_left
             },
         });
-        var layer = new TileLayer({
-            // url: "https://services.arcgisonline.com/arcgis/rest/services/World_Terrain_Base/MapServer"
-            url: "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer"
-        });
+        // var layer = new ImageryLayer({
+        //     // url: "https://services.arcgisonline.com/arcgis/rest/services/World_Terrain_Base/MapServer"
+        //     // url: "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer"
+        //     url: "https://www.geosceneonline.cn/image/rest/services/Hosted/tms1990/ImageServer"
+            
+        // });
         map.add(infrared);
-        map.add(layer);
+        // map.add(layer);
 
-        const nearInfrared = new TileLayer({
+        const nearInfrared = new ImageryLayer({
             portalItem: {  // autocasts as new PortalItem()
                 id: mapid_right
             },
         });
-        var layer1 = new TileLayer({
-            // url: "https://services.arcgisonline.com/arcgis/rest/services/World_Terrain_Base/MapServer"
-            url: "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer"
-        });
+        // var layer1 = new ImageryLayer({
+        //     // url: "https://services.arcgisonline.com/arcgis/rest/services/World_Terrain_Base/MapServer"
+        //     url: "https://www.geosceneonline.cn/image/rest/services/Hosted/tms1990/ImageServer"
+        // });
         map.add(nearInfrared);
-        map.add(layer1);
+        // map.add(layer1);
 
         const view = new MapView({
             container: "viewDiv",
@@ -108,8 +111,8 @@ function initMap(mapid_left,mapid_right) {
         });
 
         const swipe = new Swipe({
-            leadingLayers: [layer,infrared,],
-            trailingLayers: [layer1,nearInfrared,],
+            leadingLayers: [infrared,],
+            trailingLayers: [nearInfrared,],
             position: 50, // set position of widget to 35%
             view: view
         });
@@ -163,20 +166,21 @@ function onRightChanged(){
 
 function secMap(mapid_left1,mapid_right1) {
     require([
-        "esri/Map",
-        "esri/views/MapView",
-        "esri/layers/TileLayer",
-        "esri/core/watchUtils",
+        "geoscene/Map",
+        "geoscene/views/MapView",
+        // "geoscene/layers/TileLayer",
+        "geoscene/layers/ImageryLayer",
+        "geoscene/core/watchUtils",
   
-    ], function(Map, MapView, TileLayer,watchUtils) {
-        const left_image = new TileLayer({
+    ], function(Map, MapView, ImageryLayer,watchUtils) {
+        const left_image = new ImageryLayer({
             portalItem: {  // autocasts as new PortalItem()
                 id: mapid_left1
             },
         });
 
        // map.add(left_image);
-        const right_image = new TileLayer({
+        const right_image = new ImageryLayer({
             portalItem: {  // autocasts as new PortalItem()
                 id: mapid_right1
             },
