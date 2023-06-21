@@ -1,26 +1,26 @@
 $(function () {
     //35e608bbea0944f5872ceefcb462b157
     //fca96b4df7324044a08b29b8b7306dc9   吴老师制作的页面
-    var customID = "fca96b4df7324044a08b29b8b7306dc9";
+    var customID = "51e33702905441d883f8e7b2ed4c1bb7";
     initDefaultMap(customID);
 });
 
 //初始化地图
 function initDefaultMap(customID) {
     require([
-        "esri/layers/FeatureLayer",
-        "esri/Map",
-        "esri/views/MapView",
-        "esri/views/SceneView",
-        "esri/PopupTemplate",
-        "esri/widgets/LayerList",
-        "esri/WebScene",
-        "esri/layers/GraphicsLayer",
-        "esri/widgets/Sketch/SketchViewModel",
-        "esri/tasks/support/PrintTemplate",
-        "esri/widgets/Home"
+        "geoscene/layers/FeatureLayer",
+        "geoscene/Map",
+        "geoscene/views/MapView",
+        "geoscene/views/SceneView",
+        "geoscene/PopupTemplate",
+        "geoscene/widgets/LayerList",
+        "geoscene/WebScene",
+        "geoscene/layers/GraphicsLayer",
+        "geoscene/widgets/Sketch/SketchViewModel",
+        "geoscene/tasks/support/PrintTemplate",
+        "geoscene/widgets/Home"
     ], function (FeatureLayer, Map, MapView, SceneView, PopupTemplate, LayerList, WebScene,
-                 GraphicsLayer, SketchViewModel, PrintTemplate, Home) {
+        GraphicsLayer, SketchViewModel, PrintTemplate, Home) {
         const map = new WebScene({
             portalItem: {
                 id: customID
@@ -38,7 +38,13 @@ function initDefaultMap(customID) {
         view.ui.remove('attribution');//清除底部powered by ESRI
 
         //region 绘制多边形
-        const gLayer = new GraphicsLayer();
+        const gLayer = new GraphicsLayer(
+            {
+                elevationInfo: {
+                    mode: "relative-to-ground" // default value
+                }
+            }
+        );
         gLayer.title = "绘制流域范围";
         map.layers.add(gLayer);
         const blue = [82, 82, 122, 0.9];
@@ -48,13 +54,13 @@ function initDefaultMap(customID) {
             symbolLayers: [
                 {
                     type: "extrude",
-                    size: 10, // extrude by 10 meters
+                    size: 20, // extrude by 10 meters
                     material: {
                         color: white
                     },
                     edges: {
                         type: "solid",
-                        size: "3px",
+                        size: "4px",
                         color: blue
                     }
                 }
@@ -64,7 +70,7 @@ function initDefaultMap(customID) {
             layer: gLayer,
             view: view,
             polygonSymbol: extrudedPolygon,
-            defaultCreateOptions:{hasZ:true}
+            defaultCreateOptions: { hasZ: true }
         });
         sketchViewModel.on("create", function (event) {
             if (event.state === "complete") {
@@ -86,7 +92,7 @@ function initDefaultMap(customID) {
                 element.classList.remove("esri-button--secondary");
             });
         }
-  
+
 
         //endregion
 
@@ -198,12 +204,12 @@ function initDefaultMap(customID) {
                     setMaskPosition(area);
                 }
                 // when the user stops dragging
-                else{
+                else {
                     // remove the drag event listener from the SceneView
                     dragHandler.remove();
                     // the screenshot of the selected area is taken
                     view
-                        .takeScreenshot({area: area, format: "png"})
+                        .takeScreenshot({ area: area, format: "png" })
                         .then(function (screenshot) {
                             // display a preview of the image
                             showPreview(screenshot);
@@ -319,7 +325,7 @@ function initDefaultMap(customID) {
                 for (let i = 0; i < byteString.length; i++) {
                     ia[i] = byteString.charCodeAt(i);
                 }
-                const blob = new Blob([ab], {type: mimeString});
+                const blob = new Blob([ab], { type: mimeString });
 
                 // download file
                 window.navigator.msSaveOrOpenBlob(blob, filename);
@@ -486,22 +492,22 @@ function initDefaultMap(customID) {
 
 
 var popupFeature = null;
-function setContentInfo(feature){
+function setContentInfo(feature) {
     popupFeature = feature;
     console.dir("popupFeature:" + popupFeature);
-    if(popupFeature.graphic.layer.title == "植被实习点" && popupFeature.graphic.attributes.OBJECTID == "1"){
+    if (popupFeature.graphic.layer.title == "植被实习点" && popupFeature.graphic.attributes.OBJECTID == "1") {
         var node = "<p style='color: gray'>实习点位置：禅源寺前</p>";
-    }else if(popupFeature.graphic.layer.title == "土壤实习点" && popupFeature.graphic.attributes.OBJECTID == "2"){
+    } else if (popupFeature.graphic.layer.title == "土壤实习点" && popupFeature.graphic.attributes.OBJECTID == "2") {
         var node = "<p style='color: gray'>实习点位置：大有村</p>";
-    }else {
+    } else {
         var node = "<p style='color: gray'>实习点位置：往三里亭路上</p>";
     }
 
-    if(popupFeature.graphic.layer.title == "土壤实习点" && popupFeature.graphic.attributes.OBJECTID == "1"){
+    if (popupFeature.graphic.layer.title == "土壤实习点" && popupFeature.graphic.attributes.OBJECTID == "1") {
         var node = "<p style='color: gray'>实习点位置：浮玉山庄附近</p>";
-    }else if(popupFeature.graphic.layer.title == "土壤实习点" && popupFeature.graphic.attributes.OBJECTID == "2"){
+    } else if (popupFeature.graphic.layer.title == "土壤实习点" && popupFeature.graphic.attributes.OBJECTID == "2") {
         var node = "<p style='color: gray'>实习点位置：红庙附近</p>";
-    }else {
+    } else {
         var node = "<p style='color: gray'>实习点位置：{说明}</p>";
     }
     return node;
@@ -625,11 +631,11 @@ function popQJT() {
     var type = popupFeature.graphic.layer.title;
     console.log("您点击的当前点位位置为：" + mark);
     var url = "";
-    if (type == "植被实习点" && OBJECTID == "2" ) {//植被实习点2_2  大有村
+    if (type == "植被实习点" && OBJECTID == "2") {//植被实习点2_2  大有村
         url = base_url + "resource/Photo_SphereViewer/example/Plant01.html";
-    } else if (type == "植被实习点" && OBJECTID == "3" ) {//植被实习点2_1  往三里亭路上
+    } else if (type == "植被实习点" && OBJECTID == "3") {//植被实习点2_1  往三里亭路上
         url = base_url + "resource/Photo_SphereViewer/example/Plant021.html";
-    } else if (type == "植被实习点" && OBJECTID == "1" ) {//植被实习点1  禅源寺前
+    } else if (type == "植被实习点" && OBJECTID == "1") {//植被实习点1  禅源寺前
         url = base_url + "resource/Photo_SphereViewer/example/Plant022.html";
     } else if (type == "土壤实习点" && OBJECTID == "1") {//土壤剖面1
         url = base_url + "resource/Photo_SphereViewer/example/Soil01.html";
@@ -743,8 +749,8 @@ function closeItem(item) {
     }
 }
 
-function getDivPosition(div){
+function getDivPosition(div) {
     var x = div.getBoundingClientRect().left;
     var y = div.getBoundingClientRect().top;
-    return {x:x,y:y};
+    return { x: x, y: y };
 }
