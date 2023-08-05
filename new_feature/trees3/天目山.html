@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <title>天目山</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 隐藏非选择项 */
+        .el-table .hidden-row {
+            display: none;
+        }
+
+        /* 表格去线去hover */
+        .el-card__body, .el-main {
+            padding-top: 0;
+        }
+        .el-table tbody tr:hover>td {
+            background-color:rgb(255, 255, 255)!important
+        }
+        .el-table__body {
+            -webkit-border-vertical-spacing: 35px;
+        }
+        .el-table td.el-table__cell, .el-table th.el-table__cell.is-leaf {
+            border: none;
+        }
+
+        /* 表格居中 */
+        .el-table__body-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 列表展示图片样式 */
+        .imgList {
+            width: 100%;
+            display: block;
+        }
+        .el-card {
+            border-radius: 20px;
+        }
+
+        /* 列表展示文字样式 */
+        .textList {
+            margin: 16px 25px 20px 25px;
+            font-size: 20px;
+            text-align: justify;
+            line-height: 30px;
+        }
+        
+        .el-select-group__title {
+            font-size: 15px;
+            padding-bottom: 3px;
+            color: rgb(194, 194, 194);
+        }
+
+        /* 头部固定 */
+        .el-header {
+            position: relative;
+            width: 100%;
+            height: 70px;
+            margin-top: 10px;
+        }
+        .el-main {
+            position: absolute;
+            top: 140px;
+            bottom: 0;
+            overflow-y: scroll;
+            width: 99.5vw;
+        }
+        /* 下拉框设置 */
+        .el-input__inner {
+            height: 48px;
+            line-height: 48px;
+            font-size: 18px;
+            padding-left: 18px;
+        }
+        .el-select-dropdown__item {
+            font-size: 18px;
+            height: 38px;
+            line-height: 38px;
+        }
+        .el-select-dropdown__wrap {
+            max-height: 400px;
+        }
+
+        /* 标题样式 */
+        #headlineBox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #headline {
+            margin-block-end: 0;
+            margin-block-start: 20px;
+            font-size: 38px;
+            letter-spacing: 8px;
+            font-weight: bold;
+        }
+
+        /* 走马灯 */
+        .el-carousel__arrow {
+            background-color: #ffffffde;
+            color:#000000;
+            width: 40px;
+            height: 40px;
+        }
+        .el-carousel__arrow:hover {
+            background-color: #cbcbcbde;
+        }
+        .el-carousel__indicators {
+            visibility: hidden;
+        }
+        #carousel {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            z-index: 99;
+            background-color: rgba(0, 0, 0, 0.852);
+        }
+        .el-carousel {
+            height: 100%;
+            width: 100%;
+        }
+        .el-carousel__container {
+            top: 10%;
+        }
+        .el-carousel__item {
+            background-color: rgba(0, 0, 0, 0.96);
+        }
+        .el-carousel__mask {
+            opacity: 0.08;
+        }
+        .el-carousel__item--card.is-in-stage.is-hover .el-carousel__mask, .el-carousel__item--card.is-in-stage:hover .el-carousel__mask {
+            opacity: 0.02;
+        }
+        /* 走马灯图片 */
+        .carouselCol1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .imgCarousel {
+            border-radius: 7px;
+            width: 90%;
+            object-fit: contain;
+        }
+        .el-carousel__item--card {
+            display: flex;
+            align-items: center;
+        }
+        /* 走马灯文字 */
+        .textCarousel {
+            width: 90%;
+            color: #dfdfdf;
+            font-size: 18px;
+            text-align: justify;
+            line-height: 28px;
+            letter-spacing: 1px;
+        }
+        /* 走马灯按钮 */
+        #carouselBtn {
+            position: fixed;
+            top: 3%;
+            right: 1%;
+            z-index: 99;
+        }
+        .el-button.is-round {
+            padding-top: 8px;
+            padding-bottom: 8px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 50%;
+        }
+        .el-button {
+            font-size: 18px;
+        }
+
+        /* 简介 */
+        #intro {
+            width: 66%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 17%;
+            margin-right: 17%;
+        }
+        #introText {
+            text-align: justify;
+            text-indent: 2em;
+            line-height: 38px;
+            font-size: 24px;
+            letter-spacing: 2px;
+            padding-top: 20px;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="carousel" v-show="carouselShow">
+        <el-button id="carouselBtn" icon="el-icon-close" round @click="carouselHide"></el-button>
+        <template>
+            <el-carousel type="card" :autoplay="false" height="80%">
+                <el-carousel-item v-for="item in dataSelect" :key="item">
+                    <el-row type="flex" align="middle">
+                        <el-col :span="16" class="carouselCol1">
+                            <img :src="item.image[0]" alt="image" class="imgCarousel">
+                        </el-col>
+                        <el-col :span="8">
+                            <p class="textCarousel">{{ item.content }}</p>
+                        </el-col>
+                    </el-row>
+                </el-carousel-item>
+            </el-carousel>
+        </template>
+    </div>
+    <div id="headlineBox">
+        <p id="headline">天目山主要植物介绍</p>
+    </div>
+    <div id="main">
+        <el-container>
+            <el-header>
+                <el-select v-model="selectText" filterable placeholder="搜索" @change="selectChange">
+                    <el-option-group v-for="group in selectOption" :label="group.label">
+                      <el-option v-for="item in group.options" :label="item.name" :value="item.id"></el-option>
+                    </el-option-group>
+                </el-select>
+            </el-header>
+            <el-main>
+                <div id="intro">
+                    <p id="introText">天目山地处中亚热带北缘向北亚热带的过渡边缘，气候温暖湿润，雨量充沛，自然条件优越，拥有区系成分复杂、种群丰富的生物资源和独特的环境资源，形成了较为稳定的自然生态系统。其植被类型垂直分布明显，海拔由低到高依次为常绿阔叶林、常绿落叶阔叶混交林、高大柳杉林、山顶矮林，此外还有竹林和人工杉木林在此分布。实习过程中着重观察了阔叶林、针阔叶混交林、针叶林、竹林、竹阔混交林以及落叶矮林。</p>
+                </div>
+                <el-table :data="dataOrigin" :row-class-name="tableRowClassName" :cell-style="{'text-align':'center'}" :show-header="false">
+                    <el-table-column width="750px">
+                        <template slot-scope="scope">
+                            <el-card :body-style="{ padding: '0px' }">
+                                <img :id="scope.row.id" v-for="image in scope.row.image" :src="image" class="imgList" @click="carouselShow">
+                                <div>
+                                    <p class="textList">{{ scope.row.content }}</p>
+                                </div>
+                            </el-card>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </el-main>
+        </el-container>
+    </div>
+
+    <script src="./vue.min.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <script type="module">
+        import { selectOption } from './selectOption.js'
+        import { dataList } from './dataList.js'
+        const dataList2 = JSON.parse(JSON.stringify(dataList))
+
+        const vm = new Vue ({
+            el: '#main',
+            data () {
+                return {
+                    selectText: '',
+                    selectOption: selectOption,
+                    dataOrigin: dataList,
+                }
+            },
+            methods: {
+                tableRowClassName (row) {
+                    if ((this.selectText.length != 0) && (row.row.id != this.selectText) && (this.selectText != -1)) {
+                        return 'hidden-row'
+                    }
+                    return ''
+                },
+                selectChange (res) {
+                    if (res != -1) {
+                        vm2.dataSelect = dataList.slice(res,res+1)
+                    }
+                    else {
+                        vm2.dataSelect = dataList2
+                    }
+                },
+                carouselShow (res) {
+                    if (this.selectText == -1 || this.selectText.length == 0) {
+                        vm2.$children[1].activeIndex = Number(res.target.attributes.id.value)
+                    }
+                    else {
+                        vm2.$children[1].activeIndex = 0
+                    }
+                    vm2.carouselShow = true
+                }
+            }
+        })
+
+        const vm2 = new Vue ({
+            el: '#carousel',
+            data () {
+                return {
+                    dataSelect: dataList,
+                    carouselShow: false,
+                }
+            },
+            methods: {
+                carouselHide () {
+                    this.carouselShow = false
+                },
+            }
+        })
+
+    </script>
+</body>
+</html>
