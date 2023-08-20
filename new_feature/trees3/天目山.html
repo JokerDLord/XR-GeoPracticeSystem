@@ -43,7 +43,7 @@
             display: block;
         }
         .el-card {
-            border-radius: 20px;
+            border-radius: 30px;
         }
 
         /* 列表展示文字样式 */
@@ -200,6 +200,9 @@
             padding-top: 20px;
             padding-bottom: 5px;
         }
+        .plantcard{
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -239,7 +242,7 @@
                 <el-table :data="dataOrigin" :row-class-name="tableRowClassName" :cell-style="{'text-align':'center'}" :show-header="false">
                     <el-table-column width="750px">
                         <template slot-scope="scope">
-                            <el-card :body-style="{ padding: '0px' }">
+                            <el-card :body-style="{ padding: '0px' }" class="plantcard">
                                 <img :id="scope.row.id" v-for="image in scope.row.image" :src="image" class="imgList" @click="carouselShow">
                                 <div>
                                     <p class="textList">{{ scope.row.content }}</p>

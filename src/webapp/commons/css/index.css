@@ -293,6 +293,9 @@ a {
 #item_paper .main_dt {
     background-image: url(../image/index/statistics.png)
 }
+#item_plant .main_dt {
+    background-image: url(../image/index/植物.png)
+}
 
 .child_dt {
     font-size: 14px;
