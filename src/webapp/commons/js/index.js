@@ -223,6 +223,22 @@ function changeIframe(menuName) {
             $("#iframe_TR").css("display", "none");
             $("#iframe_Water").css("display", "none");
             break;
+        case "系统维护":
+            $("#iframe_others").css("display", "inline-block");
+            $("#iframe_others").attr("src", "./systemMaintenance.html");
+            $("#iframe").css("display", "none");
+            $("#iframe_ZB").css("display", "none");
+            $("#iframe_TR").css("display", "none");
+            $("#iframe_Water").css("display", "none");
+            break;
+        case "数据下载":
+            $("#iframe_others").css("display", "inline-block");
+            $("#iframe_others").attr("src", "./datadownload/datadownload.html");
+            $("#iframe").css("display", "none");
+            $("#iframe_ZB").css("display", "none");
+            $("#iframe_TR").css("display", "none");
+            $("#iframe_Water").css("display", "none");
+            break;
     }
 }
 window.changeIframe = changeIframe;
