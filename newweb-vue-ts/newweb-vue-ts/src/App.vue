@@ -29,7 +29,7 @@
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .el-header {
   width: 100%;
   height: 90px;
@@ -42,7 +42,9 @@
 }
 
 .el-aside {
-  color: var(--el-text-color-primary);
-  background: var(--el-color-primary-light-8);
+  // color: var(--el-text-color-primary);
+  color: $font-color-gray;
+  // background: var(--el-color-primary-light-8);
+  background: $back-color-gray;
 }
 </style>
