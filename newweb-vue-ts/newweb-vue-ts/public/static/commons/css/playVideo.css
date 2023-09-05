@@ -1,0 +1,25 @@
+body{
+    overflow: hidden;
+}
+#title{
+    background-color: #1b6d85;
+    height: 50px;
+}
+#title label {
+    font-family: 'Microsoft YaHei';
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    line-height: 50px;
+    margin-left: 20px
+}
+#videoBox {
+    width: 80%;
+    height: 10%;
+    margin-left: 10%;
+    margin-top: 10px;
+}
+#video {
+    zoom: 0.5;
+    margin-left: 5%;
+}
