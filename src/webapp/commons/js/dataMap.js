@@ -1,7 +1,8 @@
 $(function () {
     //35e608bbea0944f5872ceefcb462b157
     //fca96b4df7324044a08b29b8b7306dc9   吴老师制作的页面
-    var customID = "51e33702905441d883f8e7b2ed4c1bb7";
+    var customID = "d56bbe8e4b5e446da4bc08fcf3d0b1fb";
+    // var customID = "51e33702905441d883f8e7b2ed4c1bb7";
     initDefaultMap(customID);
 });
 
@@ -18,9 +19,10 @@ function initDefaultMap(customID) {
         "geoscene/layers/GraphicsLayer",
         "geoscene/widgets/Sketch/SketchViewModel",
         "geoscene/tasks/support/PrintTemplate",
-        "geoscene/widgets/Home"
+        "geoscene/widgets/Home",
+        "geoscene/widgets/ElevationProfile"
     ], function (FeatureLayer, Map, MapView, SceneView, PopupTemplate, LayerList, WebScene,
-        GraphicsLayer, SketchViewModel, PrintTemplate, Home) {
+        GraphicsLayer, SketchViewModel, PrintTemplate, Home, ElevationProfile) {
         const map = new WebScene({
             portalItem: {
                 id: customID
@@ -32,9 +34,41 @@ function initDefaultMap(customID) {
         });
 
         const homeBtn = new Home({
+            view: view,
+            profiles: [{
+                // 显示高程值从Map.ground
+                type: "ground", //自动 new ElevationProfileLineGround()
+                color: "#61d4a4",
+                title: "Ground elevation"
+            }, {
+                // 显示输入线图形中的高程值
+                type: "input", //自动  new ElevationProfileLineInput()
+                color: "#f57e42",
+                title: "Line elevation"
+            }, {
+                // 显示场景视图中的高程值
+                type: "view", //自动 new ElevationProfileLineView()
+                color: "#8f61d4",
+                title: "View elevation",
+                // 默认情况下，地面和所有图层都用于计算高程，但您可以定义计算中应该包括/排除哪些图元
+                exclude: [map.ground]
+            }, {
+                // 从自定义的数据源显示高程值
+                type: "query",
+                source: new ElevationLayer({
+                    url: "https://elevation3d.geoscene.cn/geoscene/rest/../Terrain3D/ImageServer"
+                }),
+                color: "#d46189",
+                title: "Custom elevation"
+            }]
+        });
+        const elevationProfile = new ElevationProfile({
             view: view
         });
+
         view.ui.add(homeBtn, "top-left");
+        // 将ElevationProfile 添加到视图的右上角
+        view.ui.add(elevationProfile, "top-right");
         view.ui.remove('attribution');//清除底部powered by ESRI
 
         //region 绘制多边形

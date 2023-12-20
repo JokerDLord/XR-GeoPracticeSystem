@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "swiper": "^10.2.0",
+    "vue-awesome-swiper": "^5.0.1"
+  }
+}
