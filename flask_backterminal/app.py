@@ -16,7 +16,7 @@ app = Flask(__name__) # 将当前模块注册为Flask实例
 CORS(app=app, supports_credentials=True) # flask前后端跨域处理
 app.debug = True
 
-dbinfo = 'tms_wx_recordupload1'  # 个人信息数据库名
+dbinfo = 'tms_webwx'  # tms数据库名
 dbrecord = 'userrecord'  # 实习记录数据库名
 
 
@@ -76,12 +76,12 @@ def crossDomainResponse(data):
 
 #HTTP 方法，可以根据需要设置
 if __name__ == '__main__':
-    # HOST = environ.get('SERVER_HOST')
-    # try:
-    #     PORT = int(environ.get('SERVER_PORT', '5988'))  # 指定端口
-    # except ValueError:
-    #     PORT = 5988
-    # app.run(HOST, PORT, debug=True)
-    server = pywsgi.WSGIServer(('0.0.0.0',5988),app)
-    server.serve_forever()
+    HOST = environ.get('0.0.0.0')
+    try:
+        PORT = int(environ.get('0.0.0.0', '5988'))  # 指定端口
+    except ValueError:
+        PORT = 5988
+    app.run(HOST, PORT, debug=True)
+    # server = pywsgi.WSGIServer(('0.0.0.0',5988),app)
+    # server.serve_forever()
  
