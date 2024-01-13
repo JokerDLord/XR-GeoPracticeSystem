@@ -18,9 +18,10 @@ function initDefaultMap(customID) {
         "geoscene/layers/GraphicsLayer",
         "geoscene/widgets/Sketch/SketchViewModel",
         "geoscene/tasks/support/PrintTemplate",
-        "geoscene/widgets/Home"
+        "geoscene/widgets/Home",
+        "geoscene/widgets/BasemapGallery"
     ], function (FeatureLayer, Map, MapView, SceneView, PopupTemplate, LayerList, WebScene,
-        GraphicsLayer, SketchViewModel, PrintTemplate, Home) {
+        GraphicsLayer, SketchViewModel, BasemapGallery, PrintTemplate, Home) {
         const map = new WebScene({
             portalItem: {
                 id: customID
@@ -111,7 +112,29 @@ function initDefaultMap(customID) {
                 }
             },
         });
-        view.ui.add(layerList, "top-right");
+        // view.ui.add(layerList, {
+        //     position:"top-right"
+        // });
+
+        // 加图层切换框
+        const basemapGallery = new BasemapGallery({
+            view: view,
+            // position: "bottom-right",
+        });
+        // Add widget to the top right corner of the view
+        view.ui.add(
+            {
+                component: layerList,
+                position: "top-right",
+                index: 0
+            }, 
+            {
+                component: basemapGallery,
+                position: "top-right",
+                index: 1
+            }, 
+          );
+        
 
         //获取webScene所有图层，处理弹框
         // map.load()

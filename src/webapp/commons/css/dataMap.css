@@ -93,7 +93,32 @@ body,
         opacity: 1
     }
 }
+.geoscene-view-width-greater-than-large .geoscene-ui-corner .geoscene-basemap-gallery.geoscene-component {
+    width: 10vw !important;
+    height: 40vh;
+    /* max-width: initial; */
+}
 
+.geoscene-view-width-greater-than-large .geoscene-ui-corner .geoscene-basemap-gallery.geoscene-component .geoscene-basemap-gallery__item-container {
+    flex-flow: row wrap;
+    align-items: center !important;
+    width: 10vw !important;
+}
+.geoscene-view-width-greater-than-large .geoscene-ui-corner .geoscene-basemap-gallery.geoscene-component .geoscene-basemap-gallery__item {
+    border: 1px solid rgba(0,0,0,0);
+    flex-flow: column wrap;
+    width: 100% !important;
+    margin: 3px 2%;
+    padding: 12px 0;
+    text-align: center;
+}
+.geoscene-view .geoscene-basemap-gallery{
+    width: 12vw !important;
+}
+.geoscene-view .geoscene-basemap-gallery {
+    min-width: 0px !important;
+    max-width: 300px;
+}
 
 
 
