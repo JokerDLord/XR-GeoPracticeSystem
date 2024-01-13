@@ -91,7 +91,7 @@ const handleClose = (key: string, keyPath: string[]) => {
                   <span>认识植物</span>
                 </template>
                 <el-menu-item index="6-1">天目山植物概况</el-menu-item>
-                <el-menu-item index="6-2">植被样方调查</el-menu-item>
+                <el-menu-item index="/plantsurvey">植被样方调查</el-menu-item>
                 <el-menu-item index="/plantquiz">植物小测试</el-menu-item>
               </el-sub-menu>
               <el-sub-menu index="7">

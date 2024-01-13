@@ -27,6 +27,11 @@ const router = createRouter({
       component: () => import('../views/operation.vue'),
     },
     {
+      path: '/plantsurvey',
+      name: '植物调查',
+      component: () => import('../views/plantsurvey.vue'),
+    },
+    {
       path: '/plantquiz',
       name: '植物小测试',
       component: () => import('../views/plantquiz.vue'),
