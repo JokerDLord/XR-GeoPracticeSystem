@@ -50,8 +50,8 @@ const handleClose = (key: string, keyPath: string[]) => {
                   <span>认识实习区域</span>
                 </template>
                 <el-menu-item index="/basicInfo">实习区基本情况</el-menu-item>
-                <el-menu-item index="2-1">实习点漫游</el-menu-item>
-                <el-menu-item index="/siteintro">实习点相册</el-menu-item>
+                <el-menu-item index="/siteintro">实习点漫游</el-menu-item>
+                <el-menu-item index="/gallery">实习点相册</el-menu-item>
                 <!-- <el-menu-item index="2-3">实习区域漫游</el-menu-item> -->
               </el-sub-menu>
               <el-sub-menu index="3">
@@ -61,9 +61,9 @@ const handleClose = (key: string, keyPath: string[]) => {
                   </el-icon>
                   <span>地质与地貌</span>
                 </template>
-                <el-menu-item index="3-1">地质地貌概况</el-menu-item>
+                <el-menu-item index="/introDimao">地质地貌概况</el-menu-item>
                 <el-menu-item index="3-2">杭州市地质图概览</el-menu-item>
-                <el-menu-item index="3-3">实习教学内容</el-menu-item>
+                <el-menu-item index="/jiaoxueDimao">实习教学内容</el-menu-item>
               </el-sub-menu>
               <el-sub-menu index="4">
                 <template #title>
@@ -73,7 +73,7 @@ const handleClose = (key: string, keyPath: string[]) => {
                   <span>水文教学</span>
                 </template>
                 <el-menu-item index="4-1">水文概况</el-menu-item>
-                <el-menu-item index="4-2">流域绘制</el-menu-item>
+                <el-menu-item index="/watershed">流域绘制</el-menu-item>
                 <!-- <el-menu-item index="4-3">流速仪介绍与使用</el-menu-item> -->
                 <el-menu-item index="4-4">实习教学内容</el-menu-item>
               </el-sub-menu>
@@ -107,7 +107,7 @@ const handleClose = (key: string, keyPath: string[]) => {
                   </el-icon>
                   <span>遥感与GIS教学</span>
                 </template>
-                <el-menu-item index="7-1">多时相遥感图像</el-menu-item>
+                <el-menu-item index="/multiTemporal">多时相遥感图像</el-menu-item>
                 <el-menu-item index="7-2">小程序GIS应用</el-menu-item>
               </el-sub-menu>
               <el-sub-menu index="8">
@@ -119,7 +119,6 @@ const handleClose = (key: string, keyPath: string[]) => {
                 </template>
                 <el-menu-item index="/soilSurvey">土壤剖面观察</el-menu-item>
                 <el-menu-item index="/plantSurvey">植被样方调查</el-menu-item>
-                <el-menu-item index="8-3">ADCP河流流速流量测量</el-menu-item>
               </el-sub-menu>
               <el-menu-item index="/datadownload">
                 <el-icon><icon-menu /></el-icon>
@@ -141,6 +140,7 @@ const handleClose = (key: string, keyPath: string[]) => {
 </template>
 
 <style lang="scss" scoped>
+
 .common-layout {
   position: absolute;
   left: 0;
