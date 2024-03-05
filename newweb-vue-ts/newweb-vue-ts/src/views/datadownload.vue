@@ -21,7 +21,7 @@
       </el-row>
     </div>
 
-    <div v-for="(datat, index) of state.datalst" style="margin: 10px 0 0 0;">
+    <div v-for="datat of state.datalst" style="margin: 10px 0 0 0;">
       <el-row :gutter="20">
         <el-col :span="12">
           <div class="grid-content bg-purple table-title">{{ datat.dataname }}</div>

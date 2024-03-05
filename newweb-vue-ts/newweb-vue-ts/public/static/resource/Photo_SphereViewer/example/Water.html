@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全景图——水文</title>
+
+  <link rel="stylesheet" href="../dist/photo-sphere-viewer.css">
+  <script src="../js/three.min.js"></script>
+  <script src="../js/doT.min.js"></script>
+  <script src="../js/uevent.min.js"></script>
+  <script src="../js/D.min.js"></script>
+  <script src="../js/photo-sphere-viewer.min.js"></script>
+  <script src="../dist/photo-sphere-viewer.js"></script>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    #photosphere {
+      width: 100%;
+      height: 100%;
+    }
+
+    .psv-button.custom-button {
+      font-size: 22px;
+      line-height: 20px;
+    }
+
+    .demo-label {
+      color: white;
+      font-size: 20px;
+      font-family: Helvetica, sans-serif;
+      text-align: center;
+      padding: 5px;
+      border: 1px solid white;
+      background: rgba(0, 0, 0, 0.4);
+    }
+    .psv-navbar{
+      display: none;
+    }
+  </style>
+</head>
+<body onload="load()">
+<div id="photosphere"></div>
+<script>
+  var PSV = new PhotoSphereViewer({
+    container: 'photosphere',
+    panorama: "../image/water.jpg"
+  });
+  var aa = PSV.getPosition();
+  var bb = PSV.camera;
+  var gscene = null;
+  var gcamera = null;
+  var grenderer = null;
+  var geometry;
+
+  function load() {
+    geometry = new THREE.Geometry();
+  }
+
+
+  // 创建文字
+  function createLine() {
+    createText();
+    var material = new THREE.LineBasicMaterial({
+      color: 0xff0000,
+      // dashSize: 3, // 虚线的大小，是指破折号和间隙之和。默认值为 3。
+      gapSize: 1, // 间隙的大小，默认值为 1。
+      linewidth: 10, // 控制线宽。默认值为 1。
+    });
+    var line = newLine();
+    gscene.add(line);
+    //gcamera.position.z = 100;
+    grenderer.render(gscene, gcamera);
+  }
+
+  function onDocumentMouseDown(event) {
+    event.preventDefault();
+    var vector = new THREE.Vector3();//三维坐标对象
+    vector.set(
+      ( event.clientX / window.innerWidth ) * 2 - 1,
+      -( event.clientY / window.innerHeight ) * 2 + 1,
+      0.5);
+    vector.unproject(gcamera);
+    var raycaster = new THREE.Raycaster(gcamera.position, vector.sub(gcamera.position).normalize());
+    var intersects = raycaster.intersectObjects(gscene.children);
+    if (intersects.length > 0) {
+      var selected = intersects[0];//取第一个物体
+      console.log("x坐标:" + selected.point.x);
+      console.log("y坐标:" + selected.point.y);
+      console.log("z坐标:" + selected.point.z);
+      var p1 = new THREE.Vector3(selected.point.x, selected.point.y, selected.point.z);
+      geometry.vertices.push(p1);
+    }
+  }
+
+  // 实线
+  function newLine() {
+    var geometry = new THREE.Geometry();
+
+    var p1 = new THREE.Vector3(38.38862057013939, 20.314464108346623, -90.00824650182541);
+    var p2 = new THREE.Vector3(26.707417299807137, 11.659645859947869, -95.54366911077007);
+    var p3 = new THREE.Vector3(40.01508549069705, 12.056173084499177, -90.7225537195637);
+    geometry.vertices.push(p1, p2, p3);
+
+    var material = new THREE.LineBasicMaterial({
+      color: 0xff0000,
+      linewidth:2000
+    });
+    var line = new THREE.Line(geometry, material);
+
+    return line;
+  }
+
+
+  // 创建文字
+  function createText() {
+
+    grenderer.sortObjects = false;
+    var text = new THREE.FontLoader().load('../font/FZLanTingHeiS-UL-GB_Regular.json', function (text) {
+      var gem = new THREE.TextGeometry('倾角', {
+        size: 2, //字号大小，一般为大写字母的高度
+        height: 0.5, //文字的厚度
+        weight: 'normal', //值为'normal'或'bold'，表示是否加粗
+        font: text, //字体，默认是'helvetiker'，需对应引用的字体文件
+        background:"#F1542B"
+      });
+      gem.center();
+      var mat = new THREE.MeshBasicMaterial(
+        { color: 0xF11019}
+      );
+      var textObj = new THREE.Mesh(gem, mat);
+      textObj.castShadow = true;
+      textObj.position.x = 33.608166322866474;
+      textObj.position.y = 13.98680180856798;
+      textObj.position.z = -89.92311169492002;
+
+      textObj.rotation.x=0.1;
+      textObj.rotation.y=0;
+      textObj.rotation.z=0.1;
+      textObj.renderOrder = 1;
+      gscene.add(textObj);
+      //new TWEEN.Tween(textObj.rotation).to({y: Math.PI * 2}, 2000).repeat(Infinity).yoyo(true).start();
+    });
+  }
+
+
+</script>
+
+</body>
+</html>

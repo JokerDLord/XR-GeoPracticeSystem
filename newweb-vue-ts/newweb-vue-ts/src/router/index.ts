@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const router = createRouter({
-  history: createWebHistory(), // hash模式：createWebHashHistory，history模式：createWebHistory
+  history: createWebHashHistory(), // hash模式：createWebHashHistory，history模式：createWebHistory
   routes: [
     {
       path: '/',
@@ -27,14 +27,45 @@ const router = createRouter({
       component: () => import('../views/operation.vue'),
     },
     {
-      path: '/plantsurvey',
-      name: '植物调查',
-      component: () => import('../views/plantsurvey.vue'),
+      path: '/basicInfo',
+      name: '实习区基本情况',
+      component: () => import('../views/basicInfo.vue'),
+    },
+    {
+      path: '/plantintro',
+      name: '植物概况',
+      component: () => import('../views/plantintro.vue'),
     },
     {
       path: '/plantquiz',
       name: '植物小测试',
       component: () => import('../views/plantquiz.vue'),
+    },
+    {
+      path: '/plantSurvey',
+      name: '植被样方调查',
+      component: () => import('../views/plantSurvey.vue'),
+    },
+    {
+      path: '/soilSurvey',
+      name: '土壤剖面观察',
+      component: () => import('../views/soilSurvey.vue'),
+    },
+    {
+      path: '/siteintro',
+      name: '实习点概览',
+      component: () => import('../views/siteintro.vue'),
+      // children: [
+      //   {
+      //     path: '/xiaohongshu',
+      //     component: () => import('../views/xiaohongshu.vue'),
+      //   }
+      // ]
+    },
+    {
+      path: '/xiaohongshu',
+      name: 'xiaohongshu',
+      component: () => import('../views/xiaohongshu.vue'),
     },
   ],
 })

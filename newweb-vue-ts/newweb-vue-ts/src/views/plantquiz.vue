@@ -32,7 +32,7 @@
           </el-row>
         </el-radio-group>
         <el-row>
-          <p class="answerHint" v-show="indexCheck[index]">正确答案: {{ optionList[quiz.A] }}</p>
+          <p class="answerHint" v-show="indexCheck[index]">正确答案: {{ optionList[Number(quiz.A)] }}</p>
         </el-row>
       </div>
     </div>
@@ -74,7 +74,7 @@ const state = reactive({
   quizList: quizList2,
 })
 
-const select = (quizIdx: number, optionIdx: any, A: string) => {
+const select = (quizIdx: number, optionIdx: any, A: string):void => {
   indexCheck.value[quizIdx] = true
   quizCheck.value[quizIdx] = (optionIdx.target._value == A)
   console.log(optionIdx);
@@ -127,7 +127,7 @@ const select = (quizIdx: number, optionIdx: any, A: string) => {
     font-size: 18px;
     color: green;
     letter-spacing: 1px;
-    margin-left: 50px;
+    margin-left: 35px;
     margin-top: 3px;
     margin-bottom: 2px;
   }
