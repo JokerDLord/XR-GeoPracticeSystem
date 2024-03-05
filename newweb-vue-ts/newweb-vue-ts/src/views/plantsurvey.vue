@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%;">
-    <iframe :src="`/static/plantSurvey.html`" frameborder="0" height="100%" width="100%" ref="fIframe">
+    <iframe src="http://139.9.165.59:8080/ECNUTMS_new/dist/static/plantSurvey.html" frameborder="0" height="100%" width="100%" ref="fIframe">
     </iframe>
   </div>
 </template>
