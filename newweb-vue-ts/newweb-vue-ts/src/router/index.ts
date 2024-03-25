@@ -7,10 +7,10 @@ const router = createRouter({
       path: '/',
       redirect: '/introduction',
     },
-    {
-      path: '/home',
-      redirect: '/introduction',
-    },
+    // {
+    //   path: '/home',
+    //   redirect: '/introduction',
+    // },
     {
       path: '/introduction',
       name: '平台介绍',
@@ -47,6 +47,11 @@ const router = createRouter({
       component: () => import('../views/plantquiz.vue'),
     },
     {
+      path: '/didaixing',
+      name: '植被地带性考察',
+      component: () => import('../views/didaixing.vue'),
+    },
+    {
       path: '/plantSurvey',
       name: '植被样方调查',
       component: () => import('../views/plantSurvey.vue'),
@@ -65,6 +70,16 @@ const router = createRouter({
       path: '/jiaoxueDimao',
       name: '实习教学内容-地貌',
       component: () => import('../views/jiaoxueDimao.vue'),
+    },
+    {
+      path: '/jiaoxueZhiwu',
+      name: '实习教学内容-植物',
+      component: () => import('../views/jiaoxueZhiwu.vue'),
+    },
+    {
+      path: '/introZhiwu',
+      name: '天目山植物概况',
+      component: () => import('../views/introZhiwu.vue'),
     },
     {
       path: '/watershed',
@@ -91,6 +106,11 @@ const router = createRouter({
       path: '/xiaohongshu',
       name: 'xiaohongshu',
       component: () => import('../views/xiaohongshu.vue'),
+    },
+    {
+      path: '/login',
+      name: '登录',
+      component: () => import('../views/login.vue'),
     },
   ],
 })

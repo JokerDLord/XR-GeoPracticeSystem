@@ -128,10 +128,10 @@
     // margin-bottom: 30px;
     padding: 0 10%;
     // background-color: rgb(197, 197, 197);
-    background-image: url("public/introdimao/title1.jpg");
-    background-position: 50% 25%;
+    background-image: url("public/introdimao/title1.jpeg");
+    background-position: 50% 70%;
     background-size: cover;
-    height: 30vh;
+    height: 27vh;
 }
 
 .title11 {
