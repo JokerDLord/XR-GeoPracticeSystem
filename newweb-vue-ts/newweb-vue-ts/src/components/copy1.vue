@@ -1,311 +1,210 @@
-<template>
-    <div class="pageBox">
-      <div class="items">
-        <div class="megText">
-          <p>
-            实习内容：
-  
-            1）通过比对或卷帘方式分析不同年份、相同季节（如1990年10月和2005年10月）遥感图像上土地覆盖的变化，并在实验报告中填写。
-  
-            2）通过比对或卷帘方式分析同一年份、不同季节（如2019年5月和2019年12月）遥感图像上土地覆盖的变化，并在实验报告中填写。
-          </p>
-        </div>
-        <div class="wayChange">
-          <el-button type="danger" :plain="swipePlain" @click="change2swipe()">卷帘式</el-button>
-          <el-button type="danger" :plain="secPlain" @click="change2sec()">对照式</el-button>
-        </div>
-        <div class="checkList">
-          <el-select placeholder="1990年10月" v-model="valueleft" size="large" @change="timeChange()">
-            <el-option v-for="item in timeSeries" :label="item.label" :value="item.value"></el-option>
-          </el-select>
-          <el-select placeholder="1990年10月" v-model="valueright" size="large" @change="timeChange()">
-            <el-option v-for="item in timeSeries" :label="item.label" :value="item.value"></el-option>
-          </el-select>
-        </div>
-      </div>
-      <div class="mapBox">
-        <div class="swipe" :style="{ display: mapShow[mapFlag] }">
-          <div id="viewDiv"></div>
-        </div>
-        <div class="sec" :style="{ display: mapShow[mapFlag^1] }">
-          <div id="viewDivLeft"></div>
-          <div id="viewDivRight"></div>
-        </div>
-      </div>
-  
-    </div>
-  </template>
-  
-  <script setup lang="ts">
-  
-  import { onMounted, ref, Ref } from 'vue'
-  import Map from "@geoscene/core/Map";
-  import MapView from "@geoscene/core/views/MapView";
-  import ImageryLayer from "@geoscene/core/layers/ImageryLayer";
-  import Swipe from "@geoscene/core/widgets/Swipe";
-  
-  let mapFlag = ref(0)
-  let mapShow: Ref<string[]> = ref(['flex', 'none'])
-  
-  let map = new Map();
-  let view = new MapView();
-  let viewLeft = new MapView();
-  let viewRight = new MapView();
-  
-  let valueleft = ref('e85dfd664c7b4b7db47a49a9bef5abb9')
-  let valueright = ref('e85dfd664c7b4b7db47a49a9bef5abb9')
-  
-  let leftfrared
-  let rightInfrared
-  let swipe
-  
-  const timeSeries = [
-    {
-      label: '1990年10月',
-      value: 'e85dfd664c7b4b7db47a49a9bef5abb9'
-    },
-    {
-      label: '1995年01月',
-      value: '4b191ac1ca3d437d87e3a426ba96ba88'
-    },
-    {
-      label: '2000年07月',
-      value: '98dd57f868a5453482d5d362074450dd'
-    },
-    {
-      label: '2005年10月',
-      value: 'd291d689abb24a42bae88bff59642138'
-    },
-    {
-      label: '2010年05月',
-      value: 'bae059053a844d22a62a433e566aeb86'
-    },
-    {
-      label: '2015年10月',
-      value: '6a8fe8bbf66843d48d69e8cfdef79fdd'
-    },
-    {
-      label: '2019年04月',
-      value: 'acdc191ce8b94256a6e196f85f8617a1'
-    },
-    {
-      label: '2019年05月',
-      value: 'b6012b9ff9da46a9bc65fe342e658e46'
-    },
-    {
-      label: '2019年10月',
-      value: '2033b6a5118741478c6205a7f471c43b'
-    },
-    {
-      label: '2019年12月',
-      value: 'e32fcc6d029646e9be35b7f368f4e905'
-    },
-    {
-      label: '2020年02月',
-      value: 'd9f146b647f7454ea2cd31e9c439e30e'
-    }
-  ]
-  
-  const timeChange = () => {
-    if (mapFlag.value === 0) {
-      initswipemap()
-    } else {
-      initsecmap()
-    }
-  }
-  
-  let swipePlain = ref(false)
-  let secPlain = ref(true)
-  
-  const change2swipe = () => {
-    if (swipePlain.value != false) {
-      swipePlain.value = false
-      secPlain.value = true
-      mapFlag.value = 1 ^ mapFlag.value
-      valueleft = ref('e85dfd664c7b4b7db47a49a9bef5abb9')
-      valueright = ref('e85dfd664c7b4b7db47a49a9bef5abb9')
-      initswipemap()
-    }
-  }
-  
-  const change2sec = () => {
-    if (secPlain.value != false) {
-      swipePlain.value = true
-      secPlain.value = false
-      mapFlag.value = 1 ^ mapFlag.value
-      valueleft = ref('e85dfd664c7b4b7db47a49a9bef5abb9')
-      valueright = ref('e85dfd664c7b4b7db47a49a9bef5abb9')
-      initsecmap()
-    }
-  }
-  
-  const initswipemap = () => {
-    map = new Map({});
-    view = new MapView({
-      container: "viewDiv",
-      map: map,
-      center: [119.43099, 30.327],
-      scale: 50000
-    });
-    view.ui.remove('attribution')
-    leftfrared = new ImageryLayer({
-      portalItem: {
-        id: valueleft.value
-      },
-    });
-    map.add(leftfrared)
-    rightInfrared = new ImageryLayer({
-      portalItem: {
-        id: valueright.value
-      },
-    });
-    map.add(rightInfrared)
-    swipe = new Swipe({
-      leadingLayers: [leftfrared,],
-      trailingLayers: [rightInfrared,],
-      position: 50,
-      view: view
-    });
-    view.ui.add(swipe);
-  }
-  
-  const initsecmap = () => {
-    const imgLeft = new ImageryLayer({
-      portalItem: {
-        id: valueleft.value
-      }
-    });
-    const imgRight = new ImageryLayer({
-      portalItem: {
-        id: valueright.value
-      }
-    });
-  
-    viewLeft = new MapView({
-      container: "viewDivLeft",
-      map: new Map({
-        layers: [imgLeft]
-      }),
-      center: [119.43099, 30.327],
-      scale: 50000
-    });
-    viewLeft.ui.remove('attribution')
-    viewRight = new MapView({
-      container: "viewDivRight",
-      map: new Map({
-        layers: [imgRight]
-      }),
-      center: [119.43099, 30.327],
-      scale: 50000
-    });
-    viewRight.ui.remove('attribution')
-  }
-  
-  
-  onMounted(async () => {
-    initswipemap()
-  })
-  </script>
-  
-  <style lang="scss" scoped>
-  p {
-    padding: 0;
-    margin: 0;
-  }
-  
-  .pageBox {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  
-    .items {
-      height: 5%;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-  
-      .checkList {
-        width: 45vw;
-        display: flex;
-        justify-content: space-between;
-      }
-  
-      .megText {
-        left: calc(16vw + 20px);
-        width: 13vw;
-        text-align: justify;
-        background-color: rgb(255, 255, 255);
-        padding: 15px 25px;
-        position: absolute;
-        z-index: 999;
-        border-radius: 8px;
-      }
-  
-      .wayChange {
-        position: absolute;
-        z-index: 999;
-        left: calc(16vw + 20px);
-        bottom: calc(4vh + 25px);
-        display: flex;
-        justify-content: space-evenly;
-        width: calc(13vw + 50px);
-  
-        .el-button {
-          height: 40px;
-          width: 100px;
-          font-size: 16px;
-          letter-spacing: 3px;
-          --el-button-hover-bg-color: #f56c6c;
-          --el-button-hover-border-color: #f56c6c;
-        }
-  
-        .el-button+.el-button {
-          margin-left: 0;
-        }
-      }
-    }
-  
-    .mapBox {
-      flex: 1;
-      padding-bottom: 10px;
-      height: 100%;
-      width: 45vw;
-  
-      .swipe {
-        box-sizing: border-box;
-        border: solid #ff0000;
-        height: 100%;
-        width: 100%;
-  
-        #viewDiv {
-          height: 100%;
-          width: 100%;
-        }
-      }
-  
-      .sec {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        height: 100%;
-        width: 100%;
-        box-sizing: border-box;
-        border: solid #ff0000;
-  
-        #viewDivLeft {
-          height: 100%;
-          width: 100%;
-        }
-  
-        #viewDivRight {
-          height: 100%;
-          width: 100%;
-        }
-      }
-    }
-  }
-  </style>
+<script setup lang="ts">
+import {
+  Search,
+  Compass,
+  Ship,
+  Guide,
+  Grape,
+  Menu as IconMenu,
+  Location,
+  PictureFilled,
+  SwitchFilled,
+} from '@element-plus/icons-vue'
+import mainheader from './components/mainheader.vue';
+const handleOpen = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+}
+const handleClose = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+}
+</script>
 
-  
+
+<template>
+  <div class="common-layout">
+    <el-container>
+      <el-header>
+        <mainheader></mainheader>
+      </el-header>
+      <el-container>
+        <el-aside class="main_aside">
+          <el-row class="tac">
+            <el-menu router active-text-color="#ffd04b" background-color="#3f475b" class="el-menu-vertical"
+              text-color="#fff" @open="handleOpen" @close="handleClose" :default-active="this.$route.path">
+              <el-sub-menu index="1">
+                <template #title>
+                  <el-icon>
+                    <location />
+                  </el-icon>
+                  <span>平台基础信息</span>
+                </template>
+
+                <el-menu-item index="/introduction">平台介绍</el-menu-item>
+                <el-menu-item index="/operation">平台操作步骤</el-menu-item>
+              </el-sub-menu>
+              <el-sub-menu index="2">
+                <template #title>
+                  <el-icon>
+                    <Search />
+                  </el-icon>
+                  <span>认识实习区域</span>
+                </template>
+                <el-menu-item index="/basicInfo">实习区基本情况</el-menu-item>
+                <el-menu-item index="/siteintro">实习区漫游</el-menu-item>
+                <el-menu-item index="/gallery">实习区相册</el-menu-item>
+                <!-- <el-menu-item index="2-3">实习区域漫游</el-menu-item> -->
+              </el-sub-menu>
+              <el-sub-menu index="3">
+                <template #title>
+                  <el-icon>
+                    <Compass />
+                  </el-icon>
+                  <span>地质与地貌</span>
+                </template>
+                <el-menu-item index="/introDimao">地质地貌概况</el-menu-item>
+                <el-menu-item index="3-2">杭州市地质图概览</el-menu-item>
+                <el-menu-item index="/jiaoxueDimao">实习教学内容</el-menu-item>
+              </el-sub-menu>
+              <el-sub-menu index="4">
+                <template #title>
+                  <el-icon>
+                    <Ship />
+                  </el-icon>
+                  <span>水文教学</span>
+                </template>
+                <el-menu-item index="4-1">水文概况</el-menu-item>
+                <el-menu-item index="/watershed">流域绘制</el-menu-item>
+                <!-- <el-menu-item index="4-3">流速仪介绍与使用</el-menu-item> -->
+                <el-menu-item index="4-4">实习教学内容</el-menu-item>
+              </el-sub-menu>
+              <el-sub-menu index="5">
+                <template #title>
+                  <el-icon>
+                    <Guide />
+                  </el-icon>
+                  <span>土壤教学</span>
+                </template>
+                <el-menu-item index="5-1">土壤概况</el-menu-item>
+                <!-- <el-menu-item index="5-2">土壤剖面观察</el-menu-item> -->
+                <el-menu-item index="5-3">实习教学内容</el-menu-item>
+              </el-sub-menu>
+              <el-sub-menu index="6">
+                <template #title>
+                  <el-icon>
+                    <Grape />
+                  </el-icon>
+                  <span>认识植物</span>
+                </template>
+                <el-menu-item index="6-1">天目山植物概况</el-menu-item>
+                <el-menu-item index="/plantintro">植物检索</el-menu-item>
+                <el-menu-item index="/plantquiz">植物小测试</el-menu-item>
+                <el-menu-item index="/6-4">实习教学内容</el-menu-item>
+              </el-sub-menu>
+              <el-sub-menu index="7">
+                <template #title>
+                  <el-icon>
+                    <PictureFilled />
+                  </el-icon>
+                  <span>遥感与GIS教学</span>
+                </template>
+                <el-menu-item index="/multiTemporal">多时相遥感图像</el-menu-item>
+                <el-menu-item index="7-2">小程序GIS应用</el-menu-item>
+              </el-sub-menu>
+              <el-sub-menu index="8">
+                <template #title>
+                  <el-icon>
+                    <SwitchFilled />
+                  </el-icon>
+                  <span>虚拟仿真教学</span>
+                </template>
+                <el-menu-item index="/soilSurvey">土壤剖面观察</el-menu-item>
+                <el-menu-item index="/plantSurvey">植被样方调查</el-menu-item>
+              </el-sub-menu>
+              <el-menu-item index="/datadownload">
+                <el-icon><icon-menu /></el-icon>
+                <span>平台及实习数据下载</span>
+              </el-menu-item>
+            </el-menu>
+
+          </el-row>
+        </el-aside>
+        <el-container class="right_aside">
+          <el-main class="main_content">
+            <router-view />
+          </el-main>
+          <el-footer class="main_footer">Copyright©️华东师范大学 地理科学学院</el-footer>
+        </el-container>
+      </el-container>
+    </el-container>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+
+.common-layout {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+
+  .el-header {
+    width: 100%;
+    height: 10vh;
+    top: 0;
+    left: 0;
+    text-align: center;
+    padding: 0;
+  }
+
+  .el-container {
+    width: 100%;
+    // height: 88vh;
+    // position: absolute;
+    // top: 12vh;
+    display: flex;
+
+
+    .main_aside {
+      // color: var(--el-text-color-primary);
+      color: $font-color-gray;
+      // background: var(--el-color-primary-light-8);
+      background: $back-color-gray;
+      // position: absolute;
+      height: 90vh;
+      top: 10vh;
+      left: 0;
+      width: 16vw;
+
+      .el-menu-vertical {
+        position: absolute;
+        overflow-y: auto;
+        height: 90vh;
+        width: 16vw;
+      }
+    }
+
+    .right_aside {
+      height: 90vh;
+      overflow-y: auto;
+
+      .main_content {
+        background-color: rgb(229, 229, 229);
+        // overflow-y: auto;
+        overflow: visible;
+        padding: 0;
+        margin: 0;
+      }
+
+      .main_footer {
+        display: flex;
+        align-items: center;
+        height: 4vh;
+        color: rgb(160, 160, 160);
+        font-size: 10px;
+      }
+    }
+
+  }
+}
+</style>

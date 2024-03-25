@@ -30,7 +30,7 @@ const handleClose = (key: string, keyPath: string[]) => {
         <el-aside class="main_aside">
           <el-row class="tac">
             <el-menu router active-text-color="#ffd04b" background-color="#3f475b" class="el-menu-vertical"
-              text-color="#fff" @open="handleOpen" @close="handleClose" default-active="/home">
+              text-color="#fff" @open="handleOpen" @close="handleClose" :default-active="this.$route.path">
               <el-sub-menu index="1">
                 <template #title>
                   <el-icon>
@@ -38,8 +38,7 @@ const handleClose = (key: string, keyPath: string[]) => {
                   </el-icon>
                   <span>平台基础信息</span>
                 </template>
-
-                <el-menu-item index="/home">平台介绍</el-menu-item>
+                <el-menu-item index="/introduction">平台介绍</el-menu-item>
                 <el-menu-item index="/operation">平台操作步骤</el-menu-item>
               </el-sub-menu>
               <el-sub-menu index="2">
@@ -50,8 +49,8 @@ const handleClose = (key: string, keyPath: string[]) => {
                   <span>认识实习区域</span>
                 </template>
                 <el-menu-item index="/basicInfo">实习区基本情况</el-menu-item>
-                <el-menu-item index="/siteintro">实习点漫游</el-menu-item>
-                <el-menu-item index="/gallery">实习点相册</el-menu-item>
+                <el-menu-item index="/siteintro">实习区漫游</el-menu-item>
+                <el-menu-item index="/gallery">实习区相册</el-menu-item>
                 <!-- <el-menu-item index="2-3">实习区域漫游</el-menu-item> -->
               </el-sub-menu>
               <el-sub-menu index="3">
@@ -93,12 +92,13 @@ const handleClose = (key: string, keyPath: string[]) => {
                   <el-icon>
                     <Grape />
                   </el-icon>
-                  <span>认识植物</span>
+                  <span>植物教学</span>
                 </template>
-                <el-menu-item index="6-1">天目山植物概况</el-menu-item>
+                <el-menu-item index="/introZhiwu">天目山植物概况</el-menu-item>
                 <el-menu-item index="/plantintro">植物检索</el-menu-item>
                 <el-menu-item index="/plantquiz">植物小测试</el-menu-item>
-                <el-menu-item index="/6-4">实习教学内容</el-menu-item>
+                <el-menu-item index="/didaixing">植被地带性考察</el-menu-item>
+                <el-menu-item index="/jiaoxueZhiwu">实习教学内容</el-menu-item>
               </el-sub-menu>
               <el-sub-menu index="7">
                 <template #title>
@@ -130,7 +130,7 @@ const handleClose = (key: string, keyPath: string[]) => {
         </el-aside>
         <el-container class="right_aside">
           <el-main class="main_content">
-            <router-view />
+            <router-view/>
           </el-main>
           <el-footer class="main_footer">Copyright©️华东师范大学 地理科学学院</el-footer>
         </el-container>

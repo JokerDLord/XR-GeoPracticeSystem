@@ -2,12 +2,14 @@
     <el-image-viewer v-if="imgViewerVisible" @close="imgClose()" :url-list="imgList" />
     <div class="main1">
         <div class="main2">
-            <Swiper :navigation="true" :loop="false" :modules="modules" :thumbs="{ swiper: thumbsSwiper }" class="slide1">
+            <Swiper :navigation="true" :loop="false" :modules="modules" :thumbs="{ swiper: thumbsSwiper }"
+                class="slide1">
                 <swiper-slide v-for="site in props.content" class="slide">
                     <div class="slider-container">
                         <div class="left-container">
                             <el-image :src="'http://139.9.165.59:8080/tms/photos-2023/' + site.photourl_compressed"
-                                fit="contain" loading="lazy" style="width: 100%; height: 100%;cursor: pointer;" @click="imgZoom(site)">
+                                fit="contain" loading="lazy" style="width: 100%; height: 100%;cursor: pointer;"
+                                @click="imgZoom(site)">
                                 <template #placeholder>
                                     <div class="image-slot">
                                         <!-- <el-image src="../assets/image/loading.png"></el-image> -->
@@ -220,6 +222,7 @@ const setThumbsSwiper = (swiper: any) => {
     p {
         margin: 0;
     }
+
     width: 35%;
     background-color: rgb(250, 250, 250);
     display: flex;

@@ -2,7 +2,7 @@
     <div id="viewDiv">
         <div id="layerList" :style="{ width: '280px', display: divShowList[0] }"></div>
         <div id="basemapGallery" :style="{ width: '280px', display: divShowList[1] }"></div>
-        <div id="tab">
+        <div id="tab" v-show="tabShow">
             <el-menu class="tabMenu" @select="tabSelect">
                 <el-menu-item index="0" class="tabMenuItem" title="图层">
                     <el-icon style="margin: 0;">
@@ -46,7 +46,7 @@
         </div>
     </div>
 </template>
-  
+
 <script setup lang="ts">
 
 import WebScene from "@geoscene/core/WebScene";
@@ -57,9 +57,24 @@ import SketchViewModel from "@geoscene/core/widgets/Sketch/SketchViewModel";
 import AreaMeasurementAnalysis from "@geoscene/core/analysis/AreaMeasurementAnalysis";
 import GraphicsLayer from "@geoscene/core/layers/GraphicsLayer";
 
+// import { defineEmits } from 'vue';
+
 import { CopyDocument, Grid, ArrowUpBold, ArrowRightBold } from '@element-plus/icons-vue'
 import { onMounted } from "vue";
 import { ref, Ref } from 'vue'
+
+let tabShow = ref(true)
+
+const dimao = async ()=>{
+    view.ui.empty('top-left')
+    tabShow.value=false
+    console.log(webmap)
+    webmap.allLayers.items = webmap.layers.items[1]
+    // console.log(webmap.layers.items)
+    console.log(webmap.layers.items)
+
+    // webmap.layers.items[4].visible=false
+}
 
 const props = defineProps({
     params: Array()
@@ -91,7 +106,7 @@ const tabSelect = (index: string) => {
     switchList.value[Number(index)] = !flag
 }
 
-let view = new SceneView({})
+let view = ref<any>(new SceneView({}))
 let areaMeasurement: any
 let gLayer = new GraphicsLayer({})
 let sketchVM: SketchViewModel
@@ -143,6 +158,23 @@ const huizhi = async () => {
 }
 
 
+// const a = ref("fdsafew5785");
+defineExpose({
+    view,
+    dimao
+});
+
+
+
+// const emit = defineEmits(['getfromchild'])
+// emit('getfromchild', view)
+// const emit = defineEmits(['sayHello'])
+// emit("sayHello",ref('12312321'));
+// const emit = defineEmits(['child-click'])
+// const ziChuanFu = () => {
+//     emit('child-click', 1)
+// }
+
 onMounted(async () => {
     view = new SceneView({
         container: "viewDiv",
@@ -172,12 +204,18 @@ onMounted(async () => {
         container: "basemapGallery"
     });
     view.ui.add(basemapGallery, "top-right");
-
+    view.ui.remove('attribution')
     gLayer = new GraphicsLayer({
         elevationInfo: {
             mode: "relative-to-ground" // default value
         }
     });
+
+    // const emit = defineEmits<{
+    //     (event: 'sayHello', id)
+    //     // (event: 'update', id: number): void
+    // }>()
+    // emit('sayHello', view)
     gLayer.title = "绘制流域范围";
     const blue = [82, 82, 122, 1];
     const white = [255, 255, 255, 0.8];
@@ -207,13 +245,14 @@ onMounted(async () => {
 })
 
 </script>
-  
+
 <style lang="scss" scoped>
 #viewDiv {
     height: 100%;
     width: 100%;
     padding: 0;
     margin: 0;
+    position: relative;
 }
 
 #basemapGalleryDiv {
@@ -227,7 +266,7 @@ onMounted(async () => {
     width: 32px;
     height: 100px;
     right: 15px;
-    top: calc(10vh + 15px);
+    top: 15px;
     display: flex;
     flex-direction: column;
 
@@ -267,7 +306,7 @@ onMounted(async () => {
     position: absolute;
     z-index: 999;
     right: 2px;
-    bottom: calc(4vh + 19px);
+    bottom: 3px;
     // padding: 5px;
     // width: 100px;
     // height: 100px;
@@ -316,8 +355,8 @@ onMounted(async () => {
 .watershedBox {
     position: absolute;
     z-index: 999;
-    left: calc(16vw + 70px);
-    top: calc(10vh + 15px);
+    left: 70px;
+    top: 15px;
     display: flex;
     flex-direction: column;
     align-items: start;
