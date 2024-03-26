@@ -230,7 +230,11 @@ def getsharerecord():
     try:
         cursor.execute(sqlsen, (1))
         result = cursor.fetchall()
+        for idx,item in enumerate(result):
+            item['photopath'] = eval(item['photopath'])
+            result[idx] = item
         return_dict['shareres'] = result
+        
     except Exception as e:
         print(e)
     finally:
