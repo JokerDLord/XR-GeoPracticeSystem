@@ -3,11 +3,11 @@
     <div id="headline">
       <p>数据下载</p>
     </div>
-    <el-row>
+    <!-- <el-row>
       <el-col :span="24">
         <div class="grid-content bg-purple-light-intro">点击下载，进入geoscene源中下载即可</div>
       </el-col>
-    </el-row>
+    </el-row> -->
     <div></div>
     <!-- <div v-for="(quiz, index) of quizList"> -->
     <div>
@@ -21,13 +21,14 @@
       </el-row>
     </div>
 
-    <div v-for="(datat, index) of state.datalst" style="margin: 10px 0 0 0;">
+    <div v-for="datat of state.datalst" style="margin: 10px 0 0 0;">
       <el-row :gutter="20">
         <el-col :span="12">
           <div class="grid-content bg-purple table-title">{{ datat.dataname }}</div>
         </el-col>
         <el-col :span="12">
-          <div class="grid-content bg-purple-light" style="cursor: pointer;" @click="openWindow(datat.datahref)">下载</div>
+          <div class="grid-content bg-purple-light" style="cursor: pointer;" @click="openWindow(datat.datahref)">下载
+          </div>
         </el-col>
       </el-row>
     </div>
@@ -71,17 +72,7 @@ const openWindow = (weburl: string) => {
   font-weight: bold;
 }
 
-#main {
-  width: 60%;
-  top: 5%;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  /* display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap; */
-}
+#main {}
 
 .el-row {
   display: flex;
