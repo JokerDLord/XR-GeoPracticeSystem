@@ -19,8 +19,8 @@
                         </p>
                     </div>
                     <div class="imgdiv">
-                        <el-image class="img" src="public\introdimao\1.png" fit="contain"
-                            :preview-src-list="Array('public/introdimao/1.png')" />
+                        <el-image class="img" src="public\introDimao\1.png" fit="contain"
+                            :preview-src-list="Array('public/introDimao/1.png')" />
                     </div>
                 </div>
             </div>
@@ -33,8 +33,8 @@
                         </p>
                     </div>
                     <div class="imgdiv">
-                        <el-image class="img" src="public\introdimao\2.jpg" fit="contain"
-                            :preview-src-list="Array('public/introdimao/2.jpg')" />
+                        <el-image class="img" src="public\introDimao\2.jpg" fit="contain"
+                            :preview-src-list="Array('public/introDimao/2.jpg')" />
                     </div>
                 </div>
             </div>
@@ -47,8 +47,8 @@
                         </p>
                     </div>
                     <div class="imgdiv">
-                        <el-image class="img" src="public\introdimao\3.jpg" fit="contain"
-                            :preview-src-list="Array('public/introdimao/3.jpg')" />
+                        <el-image class="img" src="public\introDimao\3.jpg" fit="contain"
+                            :preview-src-list="Array('public/introDimao/3.jpg')" />
                     </div>
                 </div>
             </div>
@@ -66,8 +66,8 @@
                         </p>
                     </div>
                     <div class="imgdiv">
-                        <el-image class="img" style="width: 80%;" src="public\introdimao\5.jpeg" fit="contain"
-                            :preview-src-list="Array('public/introdimao/5.jpeg')" />
+                        <el-image class="img" style="width: 80%;" src="public\introDimao\5.jpeg" fit="contain"
+                            :preview-src-list="Array('public/introDimao/5.jpeg')" />
                     </div>
                 </div>
             </div>
@@ -102,8 +102,8 @@
                         </p>
                     </div>
                     <div class="imgdiv">
-                        <el-image class="img" src="public\introdimao\4.jpg" fit="contain"
-                            :preview-src-list="Array('public/introdimao/4.jpg')" />
+                        <el-image class="img" src="public\introDimao\4.jpg" fit="contain"
+                            :preview-src-list="Array('public/introDimao/4.jpg')" />
                     </div>
                 </div>
             </div>
@@ -123,30 +123,32 @@
     color: white;
     // text-align: left;
     line-height: 2;
-    font-size: 40px;
+    font-size: 44px;
     font-weight: bold;
     // margin-bottom: 30px;
     padding: 0 10%;
     // background-color: rgb(197, 197, 197);
-    background-image: url("public/introdimao/title1.jpeg");
+    background-image: url("public/introDimao/title1.jpeg");
     background-position: 50% 70%;
     background-size: cover;
     height: 27vh;
+    letter-spacing: 4px;
 }
 
 .title11 {
+    letter-spacing: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
     // text-align: left;
     line-height: 2;
-    font-size: 40px;
+    font-size: 44px;
     font-weight: bold;
     // margin-bottom: 30px;
     padding: 0 10%;
     // background-color: rgb(197, 197, 197);
-    background-image: url("public/introdimao/title3.jpg");
+    background-image: url("public/introDimao/title3.jpg");
     background-position: 50% 40%;
     background-size: cover;
     height: 30vh;
@@ -168,6 +170,7 @@
     text-align: left;
     font-size: 28px;
     font-weight: bold;
+    letter-spacing: 3px;
 }
 
 .content1 {

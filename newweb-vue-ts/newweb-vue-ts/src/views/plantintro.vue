@@ -1,11 +1,11 @@
 <template>
   <div class="page">
-    <div class="shadowdiv" v-if="boxShow">
-      <el-button class="shadowbtn" @click="boxClose">
+    <div class="shadowdiv" v-if="boxShow" @click="boxClose">
+      <!-- <el-button class="shadowbtn">
         <el-icon size="20">
           <Close />
         </el-icon>
-      </el-button>
+      </el-button> -->
       <swiper :msg="MSG"></swiper>
     </div>
     <div style="padding-top: 40px;">
@@ -71,7 +71,6 @@ import swiper from '../components/swiper.vue';
 
 import { onMounted, ref } from 'vue'
 
-import { Close } from '@element-plus/icons-vue'
 let selectText = ref('')
 const listCol = ref(3)
 const loading = ref(true)
@@ -116,6 +115,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .page {
   background-image: url("public/bgimg/plant1.jpg");
+  background-position: 0% 50%;
   background-attachment: fixed;
   background-size: cover;
 }
@@ -148,7 +148,7 @@ onMounted(() => {
   color: white;
 
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4) !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
   filter: Alpha(opacity=40);
   // border-top: 5px solid #5d9ef9;
   // padding: 48px 60px 0 50px;
@@ -156,16 +156,16 @@ onMounted(() => {
   .headline {
     margin-top: 40px;
     margin-bottom: 35px;
-    font-size: 34px;
-    letter-spacing: 8px;
+    font-size: 32px;
+    letter-spacing: 6px;
     font-weight: bold;
   }
 
   .mainintro {
     text-align: justify;
-    line-height: 30px;
-    font-size: 20px;
-    letter-spacing: 0.5px;
+    line-height: 28px;
+    font-size: 18px;
+    letter-spacing: 0.8px;
     margin: 0 60px 50px 60px;
     // color: #405061;
   }
@@ -224,10 +224,9 @@ onMounted(() => {
         border-radius: 20px;
         overflow: hidden;
 
-
         .cell {
           padding: 0;
-          font-size: 16px;
+          font-size: 15px;
           text-align: justify;
           line-height: 1.5em;
           color: rgb(117, 117, 117);

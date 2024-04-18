@@ -1,38 +1,42 @@
 <template>
-  <div id="main">
-    <div id="headline">
-      <p>数据下载</p>
-    </div>
-    <el-row>
-      <el-col :span="24">
-        <div class="grid-content bg-purple-light-intro">点击下载，进入geoscene源中下载即可</div>
-      </el-col>
-    </el-row>
-    <div></div>
-    <!-- <div v-for="(quiz, index) of quizList"> -->
-    <div>
-      <el-row :gutter="10">
-        <el-col :span="12">
-          <div class="table-title grid-content bg-purple">数据</div>
-        </el-col>
-        <el-col :span="12">
-          <div class="table-title grid-content bg-purple-light">Geoscene源</div>
+  <div style="width: 100%;height: 100%;display: flex;justify-content: center;">
+    <div id="main">
+      <div id="headline">
+        <p>数据下载</p>
+      </div>
+      <el-row>
+        <el-col :span="24">
+          <div class="grid-content bg-purple-light-intro">点击下载，进入geoscene源中下载即可</div>
         </el-col>
       </el-row>
-    </div>
+      <div></div>
+      <!-- <div v-for="(quiz, index) of quizList"> -->
+      <div>
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <div class="table-title grid-content bg-purple">数据</div>
+          </el-col>
+          <el-col :span="12">
+            <div class="table-title grid-content bg-purple-light">Geoscene源</div>
+          </el-col>
+        </el-row>
+      </div>
 
-    <div v-for="datat of state.datalst" style="margin: 10px 0 0 0;">
-      <el-row :gutter="20">
-        <el-col :span="12">
-          <div class="grid-content bg-purple table-title">{{ datat.dataname }}</div>
-        </el-col>
-        <el-col :span="12">
-          <div class="grid-content bg-purple-light" style="cursor: pointer;" @click="openWindow(datat.datahref)">下载</div>
-        </el-col>
-      </el-row>
+      <div v-for="datat of state.datalst" style="margin: 10px 0 0 0;">
+        <el-row :gutter="20">
+          <el-col :span="12">
+            <div class="grid-content bg-purple table-title">{{ datat.dataname }}</div>
+          </el-col>
+          <el-col :span="12">
+            <div class="grid-content bg-purple-light" style="cursor: pointer;" @click="openWindow(datat.datahref)">下载
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+      <!-- </div> -->
     </div>
-    <!-- </div> -->
   </div>
+
 </template>
 
 <script setup lang="ts">
@@ -72,11 +76,11 @@ const openWindow = (weburl: string) => {
 }
 
 #main {
-  width: 60%;
-  top: 5%;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 80%;
+  // top: 5%;
+  // // position: absolute;
+  // left: 50%;
+  // transform: translateX(-50%);
   /* display: flex;
             align-items: center;
             justify-content: center;

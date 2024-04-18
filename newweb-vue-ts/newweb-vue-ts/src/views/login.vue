@@ -3,9 +3,10 @@
         <div class="login-wrapper">
             <div class="header">登&nbsp;&nbsp;&nbsp;&nbsp;录</div>
             <div class="form-wrapper">
-                <input type="text" name="username" placeholder="用户名" class="input-item">
-                <input type="password" name="password" placeholder="密码" class="input-item">
-                <div class="btn">登录</div>
+                <input type="text" name="username" placeholder="用户名" class="input-item" v-model="id">
+                <input type="password" name="password" placeholder="密码" class="input-item" v-model="psw">
+                <div class="btn" @click="login()">登录</div>
+                <!-- <router-link tag="a" target="_blank" to="/test">第一种新窗口打开页面</router-link> -->
             </div>
             <div class="msg">
                 没有帐户？
@@ -16,7 +17,33 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+import { useRouter } from "vue-router"
+import { ElMessage } from 'element-plus'
 
+import { storeToRefs } from 'pinia';
+import { storedata } from "../store/didaixing";
+const data1 = storedata();
+let { userID, userPSW } = storeToRefs(data1)
+
+const router = useRouter()
+
+let id = ref('')
+let psw = ref('')
+
+
+const login = () => {
+    if (id.value === '' || psw.value === '') {
+        ElMessage.error('用户名和密码不能为空！')
+    }
+    else {
+        data1.userID = id
+        data1.userPSW = psw
+        router.push({
+            path: '/test'
+        })
+    }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -36,7 +63,7 @@ body {
 
 .container {
     height: 100%;
-    background-image: url("public/bgimg/loginbg2.jpg");
+    background-image: url("public/bgimg/tms.png");
     background-position: 50% 50%;
     background-size: cover;
     // background-image: linear-gradient(to right, #fbc2eb, #a6c1ee);

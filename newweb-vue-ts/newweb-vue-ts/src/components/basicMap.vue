@@ -18,7 +18,7 @@
         </div>
         <div class="watershedBox" :style="{ display: props.params[1] }">
             <div @click="huizhi()">
-                <el-button style="font-size: 15px;">
+                <el-button style="font-size: 17px; height: 40px; width: 106px">
                     {{ drawMeg }}
                 </el-button>
             </div>

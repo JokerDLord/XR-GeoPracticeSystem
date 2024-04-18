@@ -1,6 +1,6 @@
 <template>
   <div class="main1">
-    <div class="main2">
+    <div class="main2" @click.stop="console.log('内层被点击')">
       <Swiper :navigation="true" :loop="true" :modules="modules" :thumbs="{ swiper: thumbsSwiper }" class="slide1">
         <swiper-slide v-for="rec in dataList.slice(Number(props.msg)).concat(dataList.slice(0, Number(props.msg)))"
           class="slide">

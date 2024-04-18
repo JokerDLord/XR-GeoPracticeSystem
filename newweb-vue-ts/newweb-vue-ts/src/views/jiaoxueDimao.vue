@@ -4,7 +4,7 @@
         <div class="titlemap">
             <basicMap ref="childDom" :params="params"></basicMap>
         </div>
-        <div class="title1" style="letter-spacing: 8px;">
+        <div class="title1" style="letter-spacing: 4px;">
             <p><b>—</b>&nbsp;地质地貌实习教学内容&nbsp;<b>—</b></p>
         </div>
         <div id="1" class="bgwhite">
@@ -126,10 +126,10 @@ onMounted(() => {
     justify-content: center;
     align-items: center;
     color: #213547;
-    background-color: rgb(201, 201, 201);
+    background-color: rgb(219, 219, 219);
     // text-align: left;
     line-height: 2;
-    font-size: 40px;
+    font-size: 44px;
     font-weight: bold;
     // margin-bottom: 30px;
     padding: 0 10%;
@@ -182,7 +182,7 @@ onMounted(() => {
 
 .bgdark {
     // margin-bottom: 40px;
-    background-color: rgb(201, 201, 201);
+    background-color: rgb(224, 224, 224);
     padding: 5% 10%;
 }
 
@@ -190,7 +190,7 @@ onMounted(() => {
     text-align: left;
     font-size: 28px;
     font-weight: bold;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
 }
 
 .content1 {

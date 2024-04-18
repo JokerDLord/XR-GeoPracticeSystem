@@ -10,34 +10,50 @@
             </p>
         </basicMap>
         <div class="form">
-            <el-form :model="form" label-width="120px" label-position="right">
-                <div class="formtitle">
-                    <div style="width: 32%;display: flex;justify-content: center;">类型</div>
-                    <div style="display: flex;flex-direction: row;flex: 1;justify-content: space-evenly;">
-                        <div>最低海拔(m)</div>
-                        <div>最高海拔(m)</div>
-                    </div>
+            <div class="formRow Title">
+                <div class="formItem">类型</div>
+                <div class="formItem">最低海拔(m)</div>
+                <div class="formItem">最高海拔(m)</div>
+            </div>
+            <div class="formRow">
+                <div class="formItem">竹林</div>
+                <div class="formItem">
+                    <el-input v-model="inputList[0]"/>
                 </div>
-                <el-form-item label="竹林">
-                    <el-input v-model="form.A1" />
-                    <el-input v-model="form.A2" />
-                </el-form-item>
-                <el-form-item label="常绿阔叶林">
-                    <el-input v-model="form.B1" />
-                    <el-input v-model="form.B2" />
-                </el-form-item>
-                <el-form-item label="常绿落叶阔叶林">
-                    <el-input v-model="form.C1" />
-                    <el-input v-model="form.C2" />
-                </el-form-item>
-                <el-form-item label="落叶阔叶林">
-                    <el-input v-model="form.D1" />
-                    <el-input v-model="form.D2" />
-                </el-form-item>
-                <div class="btn">
-                    <el-button type="primary">确定</el-button>
+                <div class="formItem">
+                    <el-input v-model="inputList[1]"/>
                 </div>
-            </el-form>
+            </div>
+            <div class="formRow">
+                <div class="formItem">常绿阔叶林</div>
+                <div class="formItem">
+                    <el-input v-model="inputList[2]"/>
+                </div>
+                <div class="formItem">
+                    <el-input v-model="inputList[3]"/>
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="formItem">常绿落叶阔叶林</div>
+                <div class="formItem">
+                    <el-input v-model="inputList[4]"/>
+                </div>
+                <div class="formItem">
+                    <el-input v-model="inputList[5]"/>
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="formItem">落叶阔叶林</div>
+                <div class="formItem">
+                    <el-input v-model="inputList[6]"/>
+                </div>
+                <div class="formItem">
+                    <el-input v-model="inputList[7]"/>
+                </div>
+            </div>
+            <div class="formRow Bottom">
+                <el-button type="primary" @click="uploadvege()">确定</el-button>
+            </div>
         </div>
     </div>
 
@@ -45,20 +61,21 @@
 
 <script setup lang="ts">
 
+import { storeToRefs } from 'pinia';
+import { storedata } from "../store/didaixing";
+const data1 = storedata();
+let { vegeList } = storeToRefs(data1)
+
+const uploadvege = () => {
+    data1.vegeList = inputList
+}
+
 import basicMap from '../components/basicMap.vue';
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+
+let inputList = ref(['','','','','','','',''])
 
 let params = reactive(['block', 'none'])
-const form = reactive({
-    A1: '',
-    A2: '',
-    B1: '',
-    B2: '',
-    C1: '',
-    C2: '',
-    D1: '',
-    D2: '',
-})
 
 </script>
 
@@ -75,42 +92,48 @@ const form = reactive({
     .form {
         position: fixed;
         z-index: 999;
-        width: 18vw;
-        height: 28.5vh;
+        width: 19vw;
+        // height: 28.5vh;
         background-color: #ffffffe8;
         top: calc(10vh + 15px);
         left: calc(16vw + 65px);
         border-radius: 7px;
-        padding: 12px 20px 25px 25px;
+        padding: 20px 20px 15px 15px;
 
-        .formtitle {
-            font-size: 16px;
-            color: #606266;
-            height: 32px;
-            line-height: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        .formRow {
+            width: 100%;
             display: flex;
             flex-direction: row;
-            margin-bottom: 10px;
+            // align-content: space-between;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            margin-bottom: 15px;
+
+            .formItem {
+                width: 33%;
+
+                :deep(.el-input) {
+                    width: 80%;
+                }
+            }
+        }
+
+        .formRow.Title {
+            font-size: 18px;
             font-weight: bold;
+            margin-bottom: 20px;
         }
 
-        :deep(.el-form-item__label) {
-            text-align: justify;
-            justify-content: center;
-        }
-
-        :deep(.el-input) {
-            height: 30px;
-            width: 75px;
-        }
-
-        :deep(.el-form-item__content) {
-            justify-content: space-evenly;
-        }
-
-        .btn {
+        .formRow.Bottom {
+            margin-bottom: 0;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: center;
         }
     }
 }

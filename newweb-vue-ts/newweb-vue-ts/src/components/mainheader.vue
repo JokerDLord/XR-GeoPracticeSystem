@@ -29,14 +29,14 @@
         </el-row> -->
         </div>
         <div class="loginBox">
-            <!-- <div>
+            <div>
                 <button @click="login()">
                     登录
                 </button>
-            </div> -->
-            <div class="touxiang">
-                <img src="public\bgimg\touxiang.jpg">
-                <div>mayflies</div>
+            </div>
+            <div>
+                <!-- <img src="public\bgimg\touxiang.jpg"> -->
+                <div>{{ userID }}</div>
             </div>
             <!-- <div>
                 <router-link tag="a" target="_blank" to="/login">第一种新窗口打开页面</router-link>
@@ -51,6 +51,10 @@
 // const getImageUrl = (name:any) => {
 //     return new URL(`${name}`, import.meta.url).href
 // }
+
+import { storedata } from "../store/didaixing";
+const data1 = storedata();
+const { userID } = data1;
 
 import { useRouter } from "vue-router"
 const router = useRouter()

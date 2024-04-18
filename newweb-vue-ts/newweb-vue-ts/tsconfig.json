@@ -13,7 +13,7 @@
     "allowJs": true, //添加 编译时允许有js
     "allowSyntheticDefaultImports": true, //允许引用没有默认导出的模块
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "Node",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -23,7 +23,8 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": ["element-plus/global"]
   },
   "include": [
     "src/**/*.ts",

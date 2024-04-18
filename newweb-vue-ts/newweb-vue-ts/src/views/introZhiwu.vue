@@ -1,5 +1,5 @@
 <template>
-    <div class="title1" style="letter-spacing: 8px;">
+    <div class="title1" style="letter-spacing: 4px;">
         <p><b>—</b>&nbsp;天目山植物概况&nbsp;<b>—</b></p>
     </div>
     <div id="1" class="bgwhite">
@@ -82,13 +82,14 @@
     align-items: center;
     color: white;
     line-height: 2;
-    font-size: 40px;
+    font-size: 44px;
     font-weight: bold;
     padding: 0 10%;
     background-image: url("public/bgimg/zhiwuintro1.jpg");
     background-position: 50% 0%;
     background-size: cover;
     height: 27vh;
+    letter-spacing: 4px;
 }
 
 .bgwhite {
@@ -105,6 +106,7 @@
     text-align: left;
     font-size: 28px;
     font-weight: bold;
+    letter-spacing: 3px;
 }
 
 .content1 {
