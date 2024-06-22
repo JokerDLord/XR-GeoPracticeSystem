@@ -73,7 +73,7 @@
     // margin-bottom: 30px;
     padding: 0 10%;
     // background-color: rgb(197, 197, 197);
-    background-image: url("public/introTurang/2.jpg");
+    background-image: url("/introTurang/2.jpg");
     background-position: 50% 50%;
     background-size: cover;
     height: 27vh;
@@ -91,7 +91,7 @@
     // margin-bottom: 30px;
     padding: 0 10%;
     // background-color: rgb(197, 197, 197);
-    background-image: url("public/introTurang/1.jpg");
+    background-image: url("/introTurang/1.jpg");
     background-position: 50% 70%;
     background-size: cover;
     height: 27vh;

@@ -61,13 +61,13 @@
 
 <script setup lang="ts">
 
-import { storeToRefs } from 'pinia';
+// import { storeToRefs } from 'pinia';
 import { storedata } from "../store/didaixing";
 const data1 = storedata();
-let { vegeList } = storeToRefs(data1)
+// let { vegeList } = storeToRefs(data1)
 
 const uploadvege = () => {
-    data1.vegeList = inputList
+    data1.vegeList = inputList.value
 }
 
 import basicMap from '../components/basicMap.vue';

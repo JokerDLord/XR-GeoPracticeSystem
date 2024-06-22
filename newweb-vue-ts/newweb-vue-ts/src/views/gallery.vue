@@ -80,43 +80,43 @@ p {
 }
 
 .boxtest.i0 {
-    background-image: url("public/gallery/1.JPG");
+    background-image: url("/gallery/1.JPG");
     background-position: 20% 0%;
     background-size: cover;
 }
 
 .boxtest.i1 {
-    background-image: url("public/gallery/2.jpg");
+    background-image: url("/gallery/2.jpg");
     background-position: 80% 30%;
     background-size: cover;
 }
 
 .boxtest.i2 {
-    background-image: url("public/gallery/3.jpg");
+    background-image: url("/gallery/3.jpg");
     background-position: 90% 30%;
     background-size: cover;
 }
 
 .boxtest.i3 {
-    background-image: url("public/gallery/4.jpg");
+    background-image: url("/gallery/4.jpg");
     background-position: 60% 10%;
     background-size: cover;
 }
 
 .boxtest.i4 {
-    background-image: url("public/gallery/5.jpg");
+    background-image: url("/gallery/5.jpg");
     background-position: 60% 90%;
     background-size: cover;
 }
 
 .boxtest.i5 {
-    background-image: url("public/gallery/6.jpg");
+    background-image: url("/gallery/6.jpg");
     background-position: 80% 80%;
     background-size: cover;
 }
 
 .boxtest.i6 {
-    background-image: url("public/gallery/7.jpg");
+    background-image: url("/gallery/7.jpg");
     background-position: 40% 100%;
     background-size: cover;
 }

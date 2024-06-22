@@ -14,8 +14,8 @@
                 </p>
             </div>
             <div class="imgdiv">
-                <el-image style="width: 55%;" class="img" src="public/introZhiwu/1.jpg" fit="contain"
-                    :preview-src-list="Array('public/introZhiwu/1.jpg')" />
+                <el-image style="width: 55%;" class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/introZhiwu/1.jpg" fit="contain"
+                    :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/introZhiwu/1.jpg')" />
             </div>
         </div>
     </div>
@@ -28,14 +28,14 @@
                 </p>
             </div>
             <div class="imgdiv">
-                <el-image style="width: 55%;" class="img" src="public/introZhiwu/2.png" fit="contain"
-                    :preview-src-list="Array('public/introZhiwu/2.png')" />
+                <el-image style="width: 55%;" class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/introZhiwu/2.png" fit="contain"
+                    :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/introZhiwu/2.png')" />
             </div>
         </div>
         <div class="content3">
             <div class="imgdiv">
-                <el-image style="width: 55%;" class="img" src="public/introZhiwu/3.jpg" fit="contain"
-                    :preview-src-list="Array('public/introZhiwu/3.jpg')" />
+                <el-image style="width: 55%;" class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/introZhiwu/3.jpg" fit="contain"
+                    :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/introZhiwu/3.jpg')" />
             </div>
             <div class="text">
                 <p>
@@ -50,8 +50,8 @@
                 </p>
             </div>
             <div class="imgdiv">
-                <el-image style="width: 55%;" class="img" src="public/introZhiwu/4.png" fit="contain"
-                    :preview-src-list="Array('public/introZhiwu/4.png')" />
+                <el-image style="width: 55%;" class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/introZhiwu/4.png" fit="contain"
+                    :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/introZhiwu/4.png')" />
             </div>
         </div>
     </div>
@@ -64,8 +64,8 @@
                 </p>
             </div>
             <div class="imgdiv">
-                <el-image style="width: 55%;" class="img" src="public/introZhiwu/5.jpg" fit="contain"
-                    :preview-src-list="Array('public/introZhiwu/5.jpg')" />
+                <el-image style="width: 55%;" class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/introZhiwu/5.jpg" fit="contain"
+                    :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/introZhiwu/5.jpg')" />
             </div>
         </div>
     </div>
@@ -85,7 +85,7 @@
     font-size: 44px;
     font-weight: bold;
     padding: 0 10%;
-    background-image: url("public/bgimg/zhiwuintro1.jpg");
+    background-image: url("/bgimg/zhiwuintro1.jpg");
     background-position: 50% 0%;
     background-size: cover;
     height: 27vh;

@@ -15,8 +15,8 @@
                     </p>
                 </div>
                 <div class="imgdiv">
-                    <el-image style="width: 40%;" class="img" src="public/jiaoxueTurang/1.jpg" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueTurang/1.jpg')" />
+                    <el-image style="width: 40%;" class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueTurang/1.jpg" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueTurang/1.jpg')" />
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
     // margin-bottom: 30px;
     padding: 0 10%;
     // background-color: rgb(197, 197, 197);
-    // background-image: url("public/introdimao/title1.jpg");
+    // background-image: url("/introdimao/title1.jpg");
     // background-position: 50% 25%;
     // background-size: cover;
     height: 15vh;

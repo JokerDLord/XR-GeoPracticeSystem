@@ -114,7 +114,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .page {
-  background-image: url("public/bgimg/plant1.jpg");
+  background-image: url("/bgimg/plant1.jpg");
   background-position: 0% 50%;
   background-attachment: fixed;
   background-size: cover;

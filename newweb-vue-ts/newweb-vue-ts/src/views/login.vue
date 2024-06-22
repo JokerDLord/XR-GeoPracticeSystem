@@ -21,10 +21,10 @@ import { ref } from "vue";
 import { useRouter } from "vue-router"
 import { ElMessage } from 'element-plus'
 
-import { storeToRefs } from 'pinia';
+// import { storeToRefs } from 'pinia';
 import { storedata } from "../store/didaixing";
 const data1 = storedata();
-let { userID, userPSW } = storeToRefs(data1)
+// let { userID, userPSW } = storeToRefs(data1)
 
 const router = useRouter()
 
@@ -37,8 +37,8 @@ const login = () => {
         ElMessage.error('用户名和密码不能为空！')
     }
     else {
-        data1.userID = id
-        data1.userPSW = psw
+        data1.userID = id.value
+        data1.userPSW = psw.value
         router.push({
             path: '/test'
         })
@@ -63,7 +63,7 @@ body {
 
 .container {
     height: 100%;
-    background-image: url("public/bgimg/tms.png");
+    background-image: url("/bgimg/tms.png");
     background-position: 50% 50%;
     background-size: cover;
     // background-image: linear-gradient(to right, #fbc2eb, #a6c1ee);

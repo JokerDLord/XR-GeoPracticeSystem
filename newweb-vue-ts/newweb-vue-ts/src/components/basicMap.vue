@@ -65,16 +65,16 @@ import { ref, Ref } from 'vue'
 
 let tabShow = ref(true)
 
-const dimao = async ()=>{
-    view.ui.empty('top-left')
-    tabShow.value=false
-    console.log(webmap)
-    webmap.allLayers.items = webmap.layers.items[1]
-    // console.log(webmap.layers.items)
-    console.log(webmap.layers.items)
+// const dimao = async ()=>{
+//     view.ui.empty('top-left')
+//     tabShow.value=false
+//     console.log(webmap)
+//     webmap.allLayers.items = webmap.layers.items[1]
+//     // console.log(webmap.layers.items)
+//     // console.log(webmap.layers.items)
 
-    // webmap.layers.items[4].visible=false
-}
+//     // webmap.layers.items[4].visible=false
+// }
 
 const props = defineProps({
     params: Array()
@@ -161,7 +161,7 @@ const huizhi = async () => {
 // const a = ref("fdsafew5785");
 defineExpose({
     view,
-    dimao
+    // dimao
 });
 
 
@@ -217,30 +217,30 @@ onMounted(async () => {
     // }>()
     // emit('sayHello', view)
     gLayer.title = "绘制流域范围";
-    const blue = [82, 82, 122, 1];
-    const white = [255, 255, 255, 0.8];
-    const extrudedPolygon = {
-        type: "polygon-3d",
-        symbolLayers: [
-            {
-                type: "extrude",
-                size: 20, // extrude by 10 meters
-                material: {
-                    color: white
-                },
-                edges: {
-                    type: "solid",
-                    size: "4px",
-                    color: blue
-                }
-            }
-        ]
-    };
+    // const blue = [82, 82, 122, 1];
+    // const white = [255, 255, 255, 0.8];
+    // const extrudedPolygon = {
+    //     type: "polygon-3d",
+    //     symbolLayers: [
+    //         {
+    //             type: "polygon-3d",
+    //             size: 20, // extrude by 10 meters
+    //             material: {
+    //                 color: white
+    //             },
+    //             edges: {
+    //                 type: "solid",
+    //                 size: "4px",
+    //                 color: blue
+    //             }
+    //         }
+    //     ]
+    // };
     webmap.layers.add(gLayer);
     sketchVM = new SketchViewModel({
         layer: gLayer,
         view: view,
-        polygonSymbol: extrudedPolygon
+        // polygonSymbol: extrudedPolygon
     });
 })
 

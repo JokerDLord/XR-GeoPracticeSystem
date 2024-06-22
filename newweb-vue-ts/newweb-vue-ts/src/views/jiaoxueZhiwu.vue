@@ -1,9 +1,9 @@
 <template>
     <div style="padding: 0 10% 0 10%;">
 
-        <div class="titlemap">
+        <!-- <div class="titlemap">
             <basicMap ref="childDom" :params="params"></basicMap>
-        </div>
+        </div> -->
         <div class="title1" style="letter-spacing: 4px;">
             <p><b>—</b>&nbsp;植物实习教学内容&nbsp;<b>—</b></p>
         </div>
@@ -16,8 +16,8 @@
                     </p>
                 </div>
                 <div class="imgdiv">
-                    <el-image style="width: 55%;" class="img" src="public/jiaoxueZhiwu/1.jpg" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueZhiwu/1.jpg')" />
+                    <el-image style="width: 55%;" class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueZhiwu/1.jpg" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueZhiwu/1.jpg')" />
                 </div>
             </div>
         </div>
@@ -30,10 +30,10 @@
                     </p>
                 </div>
                 <div class="imgdiv">
-                    <el-image class="img" src="public/jiaoxueZhiwu/2.jpg" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueZhiwu/2.jpg')" />
-                    <el-image class="img" src="public/jiaoxueZhiwu/3.jpg" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueZhiwu/3.jpg')" />
+                    <el-image class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueZhiwu/2.jpg" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueZhiwu/2.jpg')" />
+                    <el-image class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueZhiwu/3.jpg" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueZhiwu/3.jpg')" />
                 </div>
             </div>
         </div>
@@ -46,8 +46,8 @@
                     </p>
                 </div>
                 <div class="imgdiv">
-                    <el-image class="img" src="public/jiaoxueZhiwu/4.jpg" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueZhiwu/4.jpg')" />
+                    <el-image class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueZhiwu/4.jpg" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueZhiwu/4.jpg')" />
                 </div>
             </div>
         </div>
@@ -66,17 +66,17 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
-import basicMap from '../components/basicMap.vue';
+// import { onMounted, reactive, ref } from 'vue';
+// import basicMap from '../components/basicMap.vue';
 
-let params = reactive(['none', 'none'])
+// let params = reactive(['none', 'none'])
 
-const childDom = ref(null)
-// console.log(childDom.value)
+// const childDom = ref(null)
+// // console.log(childDom.value)
 
-onMounted(() => {
-    childDom.value.dimao()
-})
+// onMounted(() => {
+//     // childDom.value.dimao()
+// })
 
 
 // const res = ref(null)
@@ -104,7 +104,7 @@ onMounted(() => {
     // margin-bottom: 30px;
     padding: 0 10%;
     // background-color: rgb(197, 197, 197);
-    // background-image: url("public/introdimao/title1.jpg");
+    // background-image: url("/introdimao/title1.jpg");
     // background-position: 50% 25%;
     // background-size: cover;
     height: 15vh;
@@ -138,7 +138,7 @@ onMounted(() => {
     // margin-bottom: 30px;
     padding: 0 10%;
     // background-color: rgb(197, 197, 197);
-    background-image: url("public/introdimao/title3.jpg");
+    background-image: url("/introdimao/title3.jpg");
     background-position: 50% 40%;
     background-size: cover;
     height: 30vh;

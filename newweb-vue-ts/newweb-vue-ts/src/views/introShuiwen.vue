@@ -16,8 +16,8 @@
                         </p>
                     </div>
                     <div class="imgdiv">
-                        <el-image class="img" src="public/introShuiwen/1.jpg" fit="contain"
-                            :preview-src-list="Array('public/introShuiwen/1.jpg')" />
+                        <el-image class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/introShuiwen/1.jpg" fit="contain"
+                            :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/introShuiwen/1.jpg')" />
                     </div>
                 </div>
             </div>
@@ -33,8 +33,8 @@
                         </p>
                     </div>
                     <div class="imgdiv">
-                        <el-image class="img" src="public/introShuiwen/2.jpeg" fit="contain"
-                            :preview-src-list="Array('public/introShuiwen/2.jpeg')" />
+                        <el-image class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/introShuiwen/2.jpeg" fit="contain"
+                            :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/introShuiwen/2.jpeg')" />
                     </div>
                 </div>
             </div>
@@ -47,8 +47,8 @@
                         </p>
                     </div>
                     <div class="imgdiv">
-                        <el-image class="img" src="public/introShuiwen/3.jpg" fit="contain"
-                            :preview-src-list="Array('public/introShuiwen/3.jpg')" />
+                        <el-image class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/introShuiwen/3.jpg" fit="contain"
+                            :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/introShuiwen/3.jpg')" />
                     </div>
                 </div>
             </div>
@@ -64,8 +64,8 @@
                         </p>
                     </div>
                     <div class="imgdiv">
-                        <el-image class="img" src="public/introShuiwen/4.jpeg" fit="contain"
-                            :preview-src-list="Array('public/introShuiwen/4.jpeg')" />
+                        <el-image class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/introShuiwen/4.jpeg" fit="contain"
+                            :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/introShuiwen/4.jpeg')" />
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
     // margin-bottom: 30px;
     padding: 0 10%;
     // background-color: rgb(197, 197, 197);
-    background-image: url("public/introShuiwen/5.jpg");
+    background-image: url("/introShuiwen/5.jpg");
     background-position: 50% 58%;
     background-size: cover;
     height: 27vh;

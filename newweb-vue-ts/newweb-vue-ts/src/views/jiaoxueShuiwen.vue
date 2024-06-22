@@ -12,8 +12,8 @@
                     </p>
                 </div>
                 <div class="imgdiv">
-                    <el-image style="width: 55%;" class="img" src="public/jiaoxueShuiwen/1.jpg" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueShuiwen/1.jpg')" />
+                    <el-image style="width: 55%;" class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueShuiwen/1.jpg" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueShuiwen/1.jpg')" />
                 </div>
             </div>
         </div>
@@ -26,10 +26,10 @@
                     </p>
                 </div>
                 <div class="imgdiv">
-                    <el-image style="width: 30%;" class="img" src="public/jiaoxueShuiwen/2.png" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueShuiwen/2.png')" />
-                    <el-image class="img" src="public/jiaoxueShuiwen/3.jpg" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueShuiwen/3.jpg')" />
+                    <el-image style="width: 30%;" class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueShuiwen/2.png" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueShuiwen/2.png')" />
+                    <el-image class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueShuiwen/3.jpg" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueShuiwen/3.jpg')" />
                 </div>
             </div>
         </div>
@@ -42,10 +42,10 @@
                     </p>
                 </div>
                 <div class="imgdiv">
-                    <el-image style="width: 34%;" class="img" src="public/jiaoxueShuiwen/4.png" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueShuiwen/4.png')" />
-                    <el-image style="width: 30%;" class="img" src="public/jiaoxueShuiwen/5.jpg" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueShuiwen/5.jpg')" />
+                    <el-image style="width: 34%;" class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueShuiwen/4.png" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueShuiwen/4.png')" />
+                    <el-image style="width: 30%;" class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueShuiwen/5.jpg" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueShuiwen/5.jpg')" />
                 </div>
             </div>
         </div>
@@ -58,8 +58,8 @@
                     </p>
                 </div>
                 <div class="imgdiv">
-                    <el-image style="width: 100%;" class="img" src="public/jiaoxueShuiwen/6.jpg" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueShuiwen/6.jpg')" />
+                    <el-image style="width: 100%;" class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueShuiwen/6.jpg" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueShuiwen/6.jpg')" />
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
     // margin-bottom: 30px;
     padding: 0 10%;
     // background-color: rgb(197, 197, 197);
-    // background-image: url("public/introdimao/title1.jpg");
+    // background-image: url("/introdimao/title1.jpg");
     // background-position: 50% 25%;
     // background-size: cover;
     height: 15vh;

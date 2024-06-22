@@ -31,7 +31,7 @@ const handleClose = (key: string, keyPath: string[]) => {
         <el-aside class="main_aside">
           <el-row class="tac">
             <el-menu router active-text-color="#ffd04b" background-color="#3f475b" class="el-menu-vertical"
-              text-color="#fff" @open="handleOpen" @close="handleClose" :default-active="this.$route.path">
+              text-color="#fff" @open="handleOpen" @close="handleClose" :default-active="$route.path">
               <el-sub-menu index="1">
                 <template #title>
                   <el-icon>

@@ -1,9 +1,9 @@
 <template>
     <div style="padding: 0 10% 0 10%;">
 
-        <div class="titlemap">
+        <!-- <div class="titlemap">
             <basicMap ref="childDom" :params="params"></basicMap>
-        </div>
+        </div> -->
         <div class="title1" style="letter-spacing: 4px;">
             <p><b>—</b>&nbsp;地质地貌实习教学内容&nbsp;<b>—</b></p>
         </div>
@@ -19,8 +19,8 @@
                     </p>
                 </div>
                 <div class="imgdiv">
-                    <el-image style="width: 55%;" class="img" src="public/jiaoxueDimao/1.png" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueDimao/1.png')" />
+                    <el-image style="width: 55%;" class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueDimao/1.png" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueDimao/1.png')" />
                 </div>
             </div>
         </div>
@@ -40,8 +40,8 @@
                     </p>
                 </div>
                 <div class="imgdiv">
-                    <el-image class="img" src="public/jiaoxueDimao/2.png" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueDimao/2.png')" />
+                    <el-image class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueDimao/2.png" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueDimao/2.png')" />
                 </div>
             </div>
         </div>
@@ -60,8 +60,8 @@
                     </p>
                 </div>
                 <div class="imgdiv">
-                    <el-image class="img" src="public/jiaoxueDimao/3.png" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueDimao/3.png')" />
+                    <el-image class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueDimao/3.png" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueDimao/3.png')" />
                 </div>
             </div>
         </div>
@@ -74,10 +74,10 @@
                     </p>
                 </div>
                 <div class="imgdiv">
-                    <el-image class="img" src="public/jiaoxueDimao/4.jpg" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueDimao/4.jpg')" />
-                    <el-image class="img" src="public/jiaoxueDimao/5.jpg" fit="contain"
-                        :preview-src-list="Array('public/jiaoxueDimao/5.jpg')" />
+                    <el-image class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueDimao/4.jpg" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueDimao/4.jpg')" />
+                    <el-image class="img" src="http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueDimao/5.jpg" fit="contain"
+                        :preview-src-list="Array('http://139.9.165.59:8080/ECNUTMS_newnew/dist/jiaoxueDimao/5.jpg')" />
                 </div>
             </div>
         </div>
@@ -96,17 +96,17 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
-import basicMap from '../components/basicMap.vue';
+// import { onMounted, reactive, ref } from 'vue';
+// import basicMap from '../components/basicMap.vue';
 
-let params = reactive(['none', 'none'])
+// let params = reactive(['none', 'none'])
 
-const childDom = ref(null)
-// console.log(childDom.value)
+// const childDom = ref(null)
+// // console.log(childDom.value)
 
-onMounted(() => {
-    childDom.value.dimao()
-})
+// onMounted(() => {
+//     // childDom.value.dimao()
+// })
 
 
 // const res = ref(null)
@@ -134,7 +134,7 @@ onMounted(() => {
     // margin-bottom: 30px;
     padding: 0 10%;
     // background-color: rgb(197, 197, 197);
-    // background-image: url("public/introdimao/title1.jpg");
+    // background-image: url("/introdimao/title1.jpg");
     // background-position: 50% 25%;
     // background-size: cover;
     height: 15vh;
@@ -168,7 +168,7 @@ onMounted(() => {
     // margin-bottom: 30px;
     padding: 0 10%;
     // background-color: rgb(197, 197, 197);
-    background-image: url("public/introdimao/title3.jpg");
+    background-image: url("/introdimao/title3.jpg");
     background-position: 50% 40%;
     background-size: cover;
     height: 30vh;
