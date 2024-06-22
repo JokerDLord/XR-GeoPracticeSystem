@@ -250,7 +250,9 @@ const setThumbsSwiper = (swiper: any) => {
         margin-right: 1.5vw;
         margin-left: 1.5vw;
         margin-top: 3vh;
+        margin-bottom: 3vh;
         text-align: justify;
+        overflow-y: auto;
     }
 
     .timestamp {
